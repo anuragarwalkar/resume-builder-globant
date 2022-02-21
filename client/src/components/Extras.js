@@ -13,10 +13,10 @@ import {Paper, withStyles, Grid} from '@material-ui/core';
 
 const styles = theme => ({
   margin: {
-    margin: theme.spacing.unit * 1.5,
+    margin: theme.spacing(1.5) ,
   },
   padding: {
-    padding: theme.spacing.unit,
+    padding: theme.spacing(),
   },
 });
 
@@ -61,7 +61,7 @@ class Experience extends Component {
         </Card>
         <CardContent>
           <div className={classes.margin}>
-            <Grid container spacing={2} alignItems="center" lg={12}>
+            <Grid container spacing={2} alignItems="center" >
               <Grid
                 item
                 xs={12}
@@ -166,7 +166,7 @@ class Experience extends Component {
             <br />
             <Divider />
             <br />
-            <Grid container spacing={2} alignItems="flex-start" lg={12}>
+            <Grid container spacing={2} alignItems="flex-start">
               <Grid
                 item
                 xs={12}
