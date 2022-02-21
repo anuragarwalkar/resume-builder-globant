@@ -1,19 +1,23 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import "./resumeStyles.css";
 
 function ResumeView() {
+  const { firstname, lastname, email, description } = useSelector(
+    (state) => state.profile
+  );
   return (
     <div className="resume-container">
       <div className="header">
         <div className="main__row">
           <div className="header__left">
             <div className="full-name">
-              <span className="first-name">Anurag</span>
-              <span className="last-name">Arwalkar</span>
+              <span className="first-name">{firstname} </span>
+              <span className="last-name">{lastname}</span>
             </div>
             <div className="contact-info">
               <span className="email">Email: </span>
-              <span className="email-val">anurag.arwalkar@globant.com</span>
+              <span className="email-val">{email}</span>
             </div>
           </div>
 
@@ -26,11 +30,7 @@ function ResumeView() {
         </div>
         <hr />
         <div className="about">
-          <span className="desc">
-            I am a front-end developer with more than 3 years of experience
-            writing html, css, and js. I'm motivated, result-focused and seeking
-            a successful team-oriented company with opportunity to grow.
-          </span>
+          <span className="desc">{description}</span>
         </div>
       </div>
       <div className="details">

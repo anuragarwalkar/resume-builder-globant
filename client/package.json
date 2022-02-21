@@ -8,14 +8,18 @@
     "@material-ui/icons": "^4.11.2",
     "@material-ui/pickers": "^3.3.10",
     "@material-ui/styles": "^4.11.4",
+    "@reduxjs/toolkit": "^1.7.2",
     "axios": "^0.19.2",
     "bootstrap": "^4.6.0",
     "cra-template": "1.0.0",
     "file-saver": "^2.0.5",
     "material-ui": "^1.0.0-beta.47",
     "react": "^16.14.0",
+    "react-bootstrap": "^2.1.2",
     "react-dom": "^16.14.0",
-    "react-scripts": "3.3.0"
+    "react-redux": "^7.2.6",
+    "react-scripts": "3.3.0",
+    "redux": "^4.1.2"
   },
   "proxy": "http://localhost:5500",
   "scripts": {

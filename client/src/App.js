@@ -61,7 +61,6 @@ export function App() {
             <ResumeView />
           </div>
         </div>
-        <button onClick={onClick}>download</button>
       </div>
     </MuiThemeProvider>
   );
