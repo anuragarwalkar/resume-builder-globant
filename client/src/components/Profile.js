@@ -85,44 +85,6 @@ class Profile extends Component {
                   }}
                 />
               </Grid>
-
-              <Grid item lg={6} xs={12} sm={12} md={6}>
-                <TextField
-                  margin="dense"
-                  label="Phone Number"
-                  variant="outlined"
-                  name="phone"
-                  style={{alignItems: 'left', width: '80%'}}
-                  value={values.phone}
-                  onChange={this.props.handleChange}
-                  InputProps={{
-                    endAdornment: (
-                      <InputAdornment position="end">
-                        <PhoneIcon />
-                      </InputAdornment>
-                    ),
-                  }}
-                />
-              </Grid>
-
-              <Grid item md={6} sm={12} xs={12} lg={6}>
-                <TextField
-                  margin="dense"
-                  label="Your Website"
-                  variant="outlined"
-                  name="website"
-                  style={{alignItems: 'left', width: '80%'}}
-                  value={values.website}
-                  onChange={this.props.handleChange}
-                  InputProps={{
-                    endAdornment: (
-                      <InputAdornment position="end">
-                        <LanguageIcon />
-                      </InputAdornment>
-                    ),
-                  }}
-                />
-              </Grid>
               <Grid item md={6} sm={12} xs={12} lg={6}>
                 <TextField
                   margin="dense"
@@ -154,60 +116,6 @@ class Profile extends Component {
                     endAdornment: (
                       <InputAdornment position="end">
                         <LinkedInIcon />
-                      </InputAdornment>
-                    ),
-                  }}
-                />
-              </Grid>
-              <Grid item md={6} sm={12} xs={12} lg={6}>
-                <TextField
-                  margin="dense"
-                  label="Twitter"
-                  variant="outlined"
-                  name="twitter"
-                  style={{alignItems: 'left', width: '80%'}}
-                  value={values.twitter}
-                  onChange={this.props.handleChange}
-                  InputProps={{
-                    endAdornment: (
-                      <InputAdornment position="end">
-                        <TwitterIcon />
-                      </InputAdornment>
-                    ),
-                  }}
-                />
-              </Grid>
-              <Grid item md={6} sm={12} xs={12} lg={6}>
-                <TextField
-                  margin="dense"
-                  label="Facebook"
-                  variant="outlined"
-                  name="facebook"
-                  style={{alignItems: 'left', width: '80%'}}
-                  value={values.facebook}
-                  onChange={this.props.handleChange}
-                  InputProps={{
-                    endAdornment: (
-                      <InputAdornment position="end">
-                        <FacebookIcon />
-                      </InputAdornment>
-                    ),
-                  }}
-                />
-              </Grid>
-              <Grid item md={6} sm={12} xs={12} lg={6}>
-                <TextField
-                  margin="dense"
-                  label="Instagram"
-                  variant="outlined"
-                  name="instagram"
-                  style={{alignItems: 'left', width: '80%'}}
-                  value={values.instagram}
-                  onChange={this.props.handleChange}
-                  InputProps={{
-                    endAdornment: (
-                      <InputAdornment position="end">
-                        <InstagramIcon />
                       </InputAdornment>
                     ),
                   }}

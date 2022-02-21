@@ -34,12 +34,6 @@ export class Resume extends Component {
     title1: '',
     link1: '',
     projectDescription1: '',
-    title2: '',
-    link2: '',
-    projectDescription2: '',
-    title3: '',
-    link3: '',
-    projectDescription3: '',
 
     // Experience Information
     institute1: '',
@@ -209,8 +203,8 @@ export class Resume extends Component {
     switch (step) {
       case 1:
         return (
-          <div className="App mt-3">
-            <div className="container col-lg-10 mx-auto text-center">
+          <div >
+            <div >
               <Profile
                 nextStep={this.nextStep}
                 handleChange={this.handleChange}
@@ -221,8 +215,8 @@ export class Resume extends Component {
         );
       case 2:
         return (
-          <div className="App mt-3">
-            <div className="container col-lg-10 mx-auto text-center">
+          <div >
+            <div >
               <Education
                 nextStep={this.nextStep}
                 prevStep={this.prevStep}
@@ -234,8 +228,8 @@ export class Resume extends Component {
         );
       case 3:
         return (
-          <div className="App mt-3">
-            <div className="container col-lg-8 mx-auto text-center">
+          <div >
+            <div >
               <Projects
                 nextStep={this.nextStep}
                 prevStep={this.prevStep}
@@ -247,8 +241,8 @@ export class Resume extends Component {
         );
       case 4:
         return (
-          <div className="App mt-3">
-            <div className="container col-lg-10 mx-auto text-center">
+          <div >
+            <div >
               <Experience
                 nextStep={this.nextStep}
                 prevStep={this.prevStep}
@@ -260,8 +254,8 @@ export class Resume extends Component {
         );
       case 5:
         return (
-          <div className="App mt-3">
-            <div className="container col-lg-10 mx-auto text-center">
+          <div >
+            <div >
               <Extras
                 prevStep={this.prevStep}
                 handleChange={this.handleChange}
