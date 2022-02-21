@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
+const initialState: any = {
   projects: [{ title: "", link: "", projectDescription: "" }],
 };
 const projectSlice = createSlice({

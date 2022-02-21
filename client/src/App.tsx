@@ -1,29 +1,12 @@
-import { createMuiTheme, MuiThemeProvider } from "@material-ui/core";
-import AppBar from "@material-ui/core/AppBar";
-import { makeStyles } from "@material-ui/core/styles";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import React from "react";
+import { Toolbar, Typography } from "@mui/material";
+import AppBar from "@mui/material/AppBar";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { renderToStaticMarkup } from "react-dom/server";
 import "./App.css";
 import ResumeEditor from "./components/ResumeEditor";
 import ResumeView from "./components/ResumeView";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  title: {
-    flexGrow: 1,
-    color: "white",
-    fontSize: "1.4rem",
-  },
-}));
-
-const theme = createMuiTheme({
+const theme = createTheme({
   palette: {
     primary: {
       main: "#bfd731",
@@ -39,9 +22,9 @@ export function App() {
     const html = renderToStaticMarkup(<ResumeView />);
     console.log(html);
   };
-  const classes = useStyles();
+
   return (
-    <MuiThemeProvider theme={theme}>
+    <ThemeProvider theme={theme}>
       <div className="App">
         <AppBar position="static">
           <Toolbar>
@@ -51,7 +34,7 @@ export function App() {
               alt="Globant Logo"
               style={{ marginRight: "5px" }}
             />
-            <Typography variant="h6" className={classes.title}>
+            <Typography variant="h6" className="">
               Globant CV Builder
             </Typography>
           </Toolbar>
@@ -65,8 +48,22 @@ export function App() {
           </div>
         </div>
       </div>
-    </MuiThemeProvider>
+    </ThemeProvider>
   );
 }
 
 export default App;
+
+declare module "@mui/material/styles" {
+  interface Theme {
+    status: {
+      danger: string;
+    };
+  }
+  // allow configuration using `createTheme`
+  interface ThemeOptions {
+    status?: {
+      danger?: string;
+    };
+  }
+}

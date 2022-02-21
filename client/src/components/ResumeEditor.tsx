@@ -1,7 +1,6 @@
-import { Button } from "@material-ui/core";
-import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
-import NavigateNextIcon from "@material-ui/icons/NavigateNext";
-import React from "react";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import { Button } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { nextStep, prevStep } from "../slices/step-slice";
 import Education from "./Education";
@@ -12,7 +11,7 @@ import Projects from "./Projects";
 
 function ResumeEditor() {
   const { step, preBtnEnabled, nextBtnEnabled } = useSelector(
-    (state) => state.step
+    (state: any) => state.step
   );
   const dispatch = useDispatch();
 
@@ -27,15 +26,15 @@ function ResumeEditor() {
   const getComponent = () => {
     switch (step) {
       case 1:
-        return <Profile nextStep={onNextStep} />;
+        return <Profile />;
       case 2:
-        return <Education nextStep={onNextStep} prevStep={onPrevStep} />;
+        return <Education />;
       case 3:
-        return <Projects nextStep={onNextStep} prevStep={onPrevStep} />;
+        return <Projects />;
       case 4:
-        return <Experience nextStep={onNextStep} prevStep={onPrevStep} />;
+        return <Experience />;
       case 5:
-        return <Extras prevStep={onPrevStep} />;
+        return <Extras />;
       default:
         return <div />;
     }
@@ -56,7 +55,7 @@ function ResumeEditor() {
           color="secondary"
           onClick={onPrevStep}
           disabled={!preBtnEnabled}
-          startIcon={<NavigateBeforeIcon />}
+          startIcon={<ArrowBackIosIcon />}
         >
           Back
         </Button>
@@ -64,7 +63,7 @@ function ResumeEditor() {
           variant="contained"
           color="secondary"
           onClick={onNextStep}
-          endIcon={<NavigateNextIcon />}
+          endIcon={<ArrowForwardIosIcon />}
           disabled={!nextBtnEnabled}
         >
           Next

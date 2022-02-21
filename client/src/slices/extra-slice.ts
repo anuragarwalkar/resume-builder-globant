@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
+const initialState: any = {
   skills: [],
   interests: [],
 };
@@ -9,10 +9,10 @@ const extraSlice = createSlice({
   name: "extra",
   initialState,
   reducers: {
-    addSkills: (state, action) => {
+    addSkills: (state: any, action) => {
       state.extra.skills = state.experience.skills.shift(action.payload);
     },
-    addIntrests: (state, action) => {
+    addIntrests: (state: any, action) => {
       state.extra.interests = state.extra.interests.shift(action.payload);
     },
   },

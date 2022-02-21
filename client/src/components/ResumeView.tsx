@@ -4,7 +4,7 @@ import "./resumeStyles.css";
 
 function ResumeView() {
   const { firstname, lastname, email, description } = useSelector(
-    (state) => state.profile
+    (state: any) => state.profile
   );
   return (
     <div className="resume-container">

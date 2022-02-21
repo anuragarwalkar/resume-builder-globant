@@ -1,22 +1,21 @@
+import EmailIcon from "@mui/icons-material/Email";
 import {
-  Card,
   CardContent,
-  CardHeader,
   Container,
   Grid,
-  makeStyles,
-  Paper,
+  InputAdornment,
   TextareaAutosize,
   TextField,
-} from "@material-ui/core";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import EmailIcon from "@material-ui/icons/Email";
+} from "@mui/material";
+import Paper from "@mui/material/Paper";
+import { makeStyles } from "@mui/styles";
 import React from "react";
-import { Col, Row } from "react-bootstrap";
+import { Card, Col, Row } from "react-bootstrap";
+import CardHeader from "react-bootstrap/esm/CardHeader";
 import { useDispatch, useSelector } from "react-redux";
 import { addProfileDetailsByName } from "../slices/profile-slice";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles: Function = makeStyles((theme: any) => ({
   margin: {
     margin: theme.spacing(1),
   },
@@ -25,13 +24,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Profile({ nextStep }) {
+function Profile() {
   const classes = useStyles();
   const dispatch = useDispatch();
 
-  const values = useSelector((state) => state.profile);
+  const values = useSelector((state: any) => state.profile);
 
-  const handleChange = (data) => {
+  const handleChange = (data: any) => {
     const { value, name } = data.target;
     dispatch(addProfileDetailsByName({ value, name }));
   };
@@ -95,13 +94,10 @@ function Profile({ nextStep }) {
             }}
           >
             <TextareaAutosize
-              margin="dense"
-              label="Title"
               name="description"
-              variant="outlined"
-              rowsMin={3}
               placeholder="Your short introduction"
               required
+              minRows={3}
               style={{ width: "90%" }}
               value={values.description}
               onChange={handleChange}

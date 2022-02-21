@@ -1,5 +1,9 @@
-import { configureStore } from "@reduxjs/toolkit";
-import { combineReducers } from "redux";
+import {
+  Action,
+  combineReducers,
+  configureStore,
+  ThunkAction,
+} from "@reduxjs/toolkit";
 import educationSlice from "../slices/education-slice";
 import experianceSlice from "../slices/experience-slice";
 import profileSlice from "../slices/profile-slice";
@@ -14,8 +18,15 @@ const reducer = combineReducers({
   project: projectSlice,
 });
 
-const store = configureStore({
+export const store = configureStore({
   reducer,
 });
 
-export default store;
+export type AppDispatch = typeof store.dispatch;
+export type RootState = ReturnType<typeof store.getState>;
+export type AppThunk<ReturnType = void> = ThunkAction<
+  ReturnType,
+  RootState,
+  unknown,
+  Action<string>
+>;

@@ -1,13 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
+const initialState: any = {
   step: 1,
   maxStepCount: 5,
   nextBtnEnabled: true,
   preBtnEnabled: false,
 };
 
-const runOnStep = (state) => {
+const runOnStep = (state: any) => {
   if (state.step === 1) {
     state.preBtnEnabled = false;
     state.nextBtnEnabled = true;

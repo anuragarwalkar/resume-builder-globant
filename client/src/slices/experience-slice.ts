@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
+const initialState: any = {
   experiences: [
     { institute: "", position: "", duration: "", experienceDescription: "" },
   ],
@@ -9,10 +9,8 @@ const experienceSlice = createSlice({
   name: "experience",
   initialState,
   reducers: {
-    addAExperience: (state, action) => {
-      state.experience.experiences = state.experience.experiences.shift(
-        action.payload
-      );
+    addAExperience: (state: any, action) => {
+      state.experiences.shift(action.payload);
     },
   },
 });

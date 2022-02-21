@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
+const initialState: any = {
   colleges: [
     {
       college: "",
@@ -24,11 +24,11 @@ const educationSlice = createSlice({
   name: "education",
   initialState,
   reducers: {
-    addEducationSchool: (state, action) => {
-      state.education.schools = state.education.schools.shift(action.payload);
+    addEducationSchool: (state: any, action) => {
+      state.schools = state.education.schools.shift(action.payload);
     },
-    addEducationCollage: (state, action) => {
-      state.education.colleges = state.education.colleges.shift(action.payload);
+    addEducationCollage: (state: any, action) => {
+      state.colleges = state.education.colleges.shift(action.payload);
     },
   },
 });

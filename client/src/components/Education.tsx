@@ -1,21 +1,19 @@
+import DateRangeIcon from "@mui/icons-material/DateRange";
+import SchoolIcon from "@mui/icons-material/School";
 import {
   Card,
   CardContent,
   CardHeader,
   Divider,
   Grid,
-  makeStyles,
+  InputAdornment,
   Paper,
   TextField,
-} from "@material-ui/core";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import DateRangeIcon from "@material-ui/icons/DateRange";
-import SchoolIcon from "@material-ui/icons/School";
-import "date-fns";
-import React from "react";
+} from "@mui/material";
+import { makeStyles } from "@mui/styles";
 import { useSelector } from "react-redux";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles: Function = makeStyles((theme: any) => ({
   margin: {
     margin: theme.spacing(1.5),
   },
@@ -26,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
 
 function Profile() {
   const classes = useStyles();
-  const values = useSelector((state) => state.education);
+  const values = useSelector((state: any) => state.education);
 
   const onChangeInput = () => {};
 
