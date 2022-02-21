@@ -1,6 +1,5 @@
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core";
 import AppBar from "@material-ui/core/AppBar";
-import { blue } from "@material-ui/core/colors";
 import { makeStyles } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
@@ -19,12 +18,16 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1,
+    color: "white",
+    fontSize: "1.4rem",
   },
 }));
 
 const theme = createMuiTheme({
   palette: {
-    primary: blue,
+    primary: {
+      main: "#bfd731",
+    },
     secondary: {
       main: "#f44336",
     },
@@ -32,7 +35,7 @@ const theme = createMuiTheme({
 });
 
 export function App() {
-  const onClick = () => {
+  const onDownloadResume = () => {
     const html = renderToStaticMarkup(<ResumeView />);
     console.log(html);
   };
@@ -43,7 +46,7 @@ export function App() {
         <AppBar position="static">
           <Toolbar>
             <img
-              src="/favicon.png"
+              src="/globant_logo_white.png"
               width="40"
               alt="Globant Logo"
               style={{ marginRight: "5px" }}

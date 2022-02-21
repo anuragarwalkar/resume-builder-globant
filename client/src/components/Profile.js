@@ -93,7 +93,11 @@ function Profile({ nextStep }) {
               />
             </Grid>
           </Grid>
-          <Row style={{ marginTop: "20px" }}>
+          <Row
+            style={{
+              marginTop: "20px",
+            }}
+          >
             <TextareaAutosize
               margin="dense"
               label="Title"
@@ -101,9 +105,8 @@ function Profile({ nextStep }) {
               variant="outlined"
               rowsMin={3}
               placeholder="Your short introduction"
-              style={{ width: 200 }}
               required
-              style={{ alignItems: "left", width: "80%" }}
+              style={{ width: "90%" }}
               value={values.description}
               onChange={handleChange}
             />
