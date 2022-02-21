@@ -4,19 +4,19 @@ const initialState = {
   colleges: [
     {
       college: "",
-      fromyear1: "",
-      toyear1: "",
-      qualification1: "",
-      description1: "",
+      fromYear: "",
+      toYear: "",
+      qualification: "",
+      description: "",
     },
   ],
   schools: [
     {
       school: "",
-      fromyear2: "",
-      toyear2: "",
-      qualification2: "",
-      description2: "",
+      fromYear: "",
+      toYear: "",
+      qualification: "",
+      description: "",
     },
   ],
 };

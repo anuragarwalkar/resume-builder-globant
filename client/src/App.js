@@ -6,7 +6,7 @@ import Typography from "@material-ui/core/Typography";
 import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import "./App.css";
-import Resume from "./components/Resume";
+import ResumeEditor from "./components/ResumeEditor";
 import ResumeView from "./components/ResumeView";
 
 const useStyles = makeStyles((theme) => ({
@@ -29,7 +29,7 @@ const theme = createMuiTheme({
       main: "#bfd731",
     },
     secondary: {
-      main: "#f44336",
+      main: "#78A9CD",
     },
   },
 });
@@ -57,10 +57,10 @@ export function App() {
           </Toolbar>
         </AppBar>
         <div style={{ display: "flex" }}>
-          <div style={{ width: "45%" }}>
-            <Resume />
+          <div style={{ flex: 0.5, marginTop: "5%" }}>
+            <ResumeEditor />
           </div>
-          <div style={{ width: "55%", padding: "20px" }}>
+          <div style={{ flex: 0.5, padding: "20px" }}>
             <ResumeView />
           </div>
         </div>

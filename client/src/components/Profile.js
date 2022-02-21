@@ -29,10 +29,6 @@ function Profile({ nextStep }) {
   const classes = useStyles();
   const dispatch = useDispatch();
 
-  const continueVal = (e) => {
-    e.preventDefault();
-    this.props.nextStep();
-  };
   const values = useSelector((state) => state.profile);
 
   const handleChange = (data) => {
@@ -149,7 +145,6 @@ function Profile({ nextStep }) {
           </Button> */}
         </div>
       </CardContent>
-      {/* <p className="text-center text-muted">Page 1 </p> */}
     </Paper>
   );
 }
