@@ -28,13 +28,13 @@ function ResumeEditor() {
       case 1:
         return <Profile />;
       case 2:
-        return <Education />;
+        return <Experience />;
       case 3:
         return <Projects />;
       case 4:
-        return <Experience />;
-      case 5:
         return <Extras />;
+      case 5:
+        return <Education />;
       default:
         return <div />;
     }
