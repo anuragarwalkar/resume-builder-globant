@@ -34,7 +34,7 @@ export function App() {
               alt="Globant Logo"
               style={{ marginRight: "5px" }}
             />
-            <Typography variant="h6" className="">
+            <Typography variant="h6" style={{ color: "white" }}>
               Globant CV Builder
             </Typography>
           </Toolbar>
