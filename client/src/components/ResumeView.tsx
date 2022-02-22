@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { useSelector } from "react-redux";
 import "./resumeStyles.css";
 
@@ -6,6 +6,27 @@ function ResumeView() {
   const { firstname, lastname, email, description } = useSelector(
     (state: any) => state.profile
   );
+  const skills = useSelector((state: any) => state.extra.skills);
+
+  const getRating = (skill: any) => {
+    const items = new Array(skill.totalRating).fill(null);
+
+    return items.map((_, index) => {
+      return (
+        <Fragment key={`${skill.name}-${index}`}>
+          <input
+            id={`${skill.name}-${index}`}
+            type="checkbox"
+            defaultChecked={index + 1 <= skill.rating}
+            readOnly
+            disabled
+          />
+          <label htmlFor={`${skill.name}-${index}`}></label>
+        </Fragment>
+      );
+    });
+  };
+
   return (
     <div className="resume-container">
       <div className="header">
@@ -37,26 +58,16 @@ function ResumeView() {
         <div className="section">
           <div className="section__title">Skills</div>
           <div className="skills">
-            <div className="skills__item">
-              <div className="left">
-                <div className="name">Javascript</div>
-              </div>
-              <div className="right">
-                <input id="ck1" type="checkbox" checked onChange={() => {}} />
-
-                <label htmlFor="ck1"></label>
-                <input id="ck2" type="checkbox" checked onChange={() => {}} />
-
-                <label htmlFor="ck2"></label>
-                <input id="ck3" type="checkbox" />
-
-                <label htmlFor="ck3"></label>
-                <input id="ck4" type="checkbox" />
-                <label htmlFor="ck4"></label>
-                <input id="ck5" type="checkbox" />
-                <label htmlFor="ck5"></label>
-              </div>
-            </div>
+            {skills.map((skill: any) => {
+              return (
+                <div key={skill.name} className="skills__item">
+                  <div className="left">
+                    <div className="name">{skill.name}</div>
+                  </div>
+                  <div className="right">{getRating(skill)}</div>
+                </div>
+              );
+            })}
           </div>
         </div>
         <div className="section">

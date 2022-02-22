@@ -1,7 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState: any = {
-  skills: [],
+  skills: [
+    { id: 1, name: "JavaScript", rating: 4, totalRating: 5 },
+    { id: 2, name: "TypeScript", rating: 3, totalRating: 5 },
+  ],
   interests: [],
 };
 

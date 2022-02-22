@@ -1,6 +1,8 @@
 import EmailIcon from "@mui/icons-material/Email";
 import {
+  Card,
   CardContent,
+  CardHeader,
   Container,
   Grid,
   InputAdornment,
@@ -10,8 +12,7 @@ import {
 import Paper from "@mui/material/Paper";
 import { makeStyles } from "@mui/styles";
 import React from "react";
-import { Card, Col, Row } from "react-bootstrap";
-import CardHeader from "react-bootstrap/esm/CardHeader";
+import { Col, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { addProfileDetailsByName } from "../slices/profile-slice";
 

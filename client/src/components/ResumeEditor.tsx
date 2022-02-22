@@ -5,9 +5,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { nextStep, prevStep } from "../slices/step-slice";
 import Education from "./Education";
 import Experience from "./Experience";
-import Extras from "./Extras";
 import Profile from "./Profile";
 import Projects from "./Projects";
+import Skills from "./Skills";
 
 function ResumeEditor() {
   const { step, preBtnEnabled, nextBtnEnabled } = useSelector(
@@ -28,11 +28,11 @@ function ResumeEditor() {
       case 1:
         return <Profile />;
       case 2:
-        return <Experience />;
+        return <Skills />;
       case 3:
-        return <Projects />;
+        return <Experience />;
       case 4:
-        return <Extras />;
+        return <Projects />;
       case 5:
         return <Education />;
       default:
