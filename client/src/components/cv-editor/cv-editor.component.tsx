@@ -2,14 +2,14 @@ import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { Button } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { nextStep, prevStep } from "../slices/step-slice";
-import Education from "./education/Education.component";
-import Experience from "./Experience";
-import Profile from "./Profile";
-import Projects from "./Projects";
-import Skills from "./Skills";
+import { nextStep, prevStep } from "../../slices/step-slice";
+import Education from "../education/Education.component";
+import Experience from "../Experience";
+import Profile from "../Profile";
+import Projects from "../Projects";
+import Skills from "../Skills";
 
-function ResumeEditor() {
+function CVEditor() {
   const { step, preBtnEnabled, nextBtnEnabled } = useSelector(
     (state: any) => state.step
   );
@@ -73,4 +73,4 @@ function ResumeEditor() {
   );
 }
 
-export default ResumeEditor;
+export default CVEditor;
