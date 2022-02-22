@@ -3,8 +3,8 @@ import { useSelector } from "react-redux";
 import "./resumeStyles.css";
 
 function ResumeView() {
-  const { firstname, lastname, email, description } = useSelector(
-    (state: any) => state.profile
+  const { name, email, description } = useSelector(
+    (state: any) => state.profile.details
   );
   const skills = useSelector((state: any) => state.extra.skills);
 
@@ -33,8 +33,7 @@ function ResumeView() {
         <div className="main__row">
           <div className="header__left">
             <div className="full-name">
-              <span className="first-name">{firstname} </span>
-              <span className="last-name">{lastname}</span>
+              <span className="first-name">{name}</span>
             </div>
             <div className="contact-info">
               <span className="email">Email: </span>

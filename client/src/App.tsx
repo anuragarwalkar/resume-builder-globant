@@ -1,13 +1,9 @@
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import {
-  BrowserRouter as Router,
-  Navigate,
-  Route,
-  Routes,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Home from "./components/home/home.component";
-import Login from "./components/login/Login.component";
+import { PrivateRoute, PublicRoute } from "./components/utils";
+import useGoogleAuth from "./useGoogleAuth";
 
 const theme = createTheme({
   palette: {
@@ -21,20 +17,17 @@ const theme = createTheme({
 });
 
 export function App() {
-  let user = null;
-  const onDownloadResume = () => {
-    // const html = renderToStaticMarkup(<ResumeView />);
-    // console.log(html);
-  };
+  const [{ token }] = useGoogleAuth();
+
   return (
     <ThemeProvider theme={theme}>
       <Router>
         <Routes>
           <Route
             path="/"
-            element={!user ? <Navigate to="/login" /> : <Home />}
+            element={<PrivateRoute Component={Home} token={token} />}
           />
-          <Route path="/login" element={<Login />} />
+          <Route path="/login" element={<PublicRoute token={token} />} />
         </Routes>
       </Router>
     </ThemeProvider>
@@ -42,3 +35,8 @@ export function App() {
 }
 
 export default App;
+
+// const onDownloadResume = () => {
+//   const html = renderToStaticMarkup(<ResumeView />);
+//   console.log(html);
+// };

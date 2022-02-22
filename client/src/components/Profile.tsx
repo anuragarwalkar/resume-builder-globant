@@ -29,7 +29,7 @@ function Profile() {
   const classes = useStyles();
   const dispatch = useDispatch();
 
-  const values = useSelector((state: any) => state.profile);
+  const values = useSelector((state: any) => state.profile.details);
 
   const handleChange = (data: any) => {
     const { value, name } = data.target;
@@ -48,27 +48,14 @@ function Profile() {
               <TextField
                 margin="dense"
                 variant="outlined"
-                name="firstname"
-                label="First Name"
+                name="name"
+                label="Full Name"
                 style={{ width: "80%" }}
                 required
-                value={values.firstname}
+                value={values.name}
                 onChange={handleChange}
               />
             </Grid>
-            <Grid item md={6} sm={12} xs={12} lg={6}>
-              <TextField
-                margin="dense"
-                label="Last Name"
-                variant="outlined"
-                style={{ width: "80%" }}
-                name="lastname"
-                required
-                value={values.lastname}
-                onChange={handleChange}
-              />
-            </Grid>
-
             <Grid item md={6} sm={12} xs={12} lg={6}>
               <TextField
                 margin="dense"
@@ -98,7 +85,7 @@ function Profile() {
               name="description"
               placeholder="Your short introduction"
               required
-              minRows={3}
+              minRows={4}
               style={{ width: "90%" }}
               value={values.description}
               onChange={handleChange}
