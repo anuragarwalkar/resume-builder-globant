@@ -3,7 +3,7 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { Button } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { nextStep, prevStep } from "../slices/step-slice";
-import Education from "./Education";
+import Education from "./education/Education.component";
 import Experience from "./Experience";
 import Profile from "./Profile";
 import Projects from "./Projects";

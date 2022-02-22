@@ -3,8 +3,8 @@ import AppBar from "@mui/material/AppBar";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { renderToStaticMarkup } from "react-dom/server";
 import "./App.css";
+import ResumeView from "./components/cv-view/ResumeView";
 import ResumeEditor from "./components/ResumeEditor";
-import ResumeView from "./components/ResumeView";
 
 const theme = createTheme({
   palette: {
