@@ -1,2 +1,17 @@
 .cv-editor-projects {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  &__content {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+  }
+
+  &__rich-text-editor {
+    flex: 0.95;
+    margin-top: 10px;
+  }
 }

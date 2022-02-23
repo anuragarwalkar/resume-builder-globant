@@ -1,6 +1,12 @@
-import { Editor, EditorState, getDefaultKeyBinding, RichUtils } from "draft-js";
+import {
+  ContentState,
+  Editor,
+  EditorState,
+  getDefaultKeyBinding,
+  RichUtils,
+} from "draft-js";
 import { stateToHTML } from "draft-js-export-html";
-import React, { Component } from "react";
+import React, { Children, Component, Fragment } from "react";
 import "./rich-text.styles.scss";
 
 class RichEditor extends Component {
@@ -10,20 +16,23 @@ class RichEditor extends Component {
     this.state = { editorState: EditorState.createEmpty() };
 
     this.focus = () => this.myRef.current.focus();
+
     this.onChange = (editorState) => {
-      this.setState({ editorState }, () => {
-        if (this.props.onChangeHtml) {
-          this.props.onChangeHtml(
-            stateToHTML(this.state.editorState.getCurrentContent())
-          );
-        }
-      });
+      this.setState({ editorState });
     };
 
     this.handleKeyCommand = this._handleKeyCommand.bind(this);
     this.mapKeyToEditorCommand = this._mapKeyToEditorCommand.bind(this);
     this.toggleBlockType = this._toggleBlockType.bind(this);
     this.toggleInlineStyle = this._toggleInlineStyle.bind(this);
+  }
+
+  _reset() {
+    const editorState = EditorState.push(
+      this.state.editorState,
+      ContentState.createFromText("")
+    );
+    this.setState({ editorState });
   }
 
   _handleKeyCommand(command, editorState) {
@@ -60,6 +69,13 @@ class RichEditor extends Component {
     );
   }
 
+  _onSubmit() {
+    this._reset();
+    this.props.onSubmit(
+      stateToHTML(this.state.editorState.getCurrentContent())
+    );
+  }
+
   render() {
     const { editorState } = this.state;
 
@@ -74,29 +90,44 @@ class RichEditor extends Component {
     }
 
     return (
-      <div className="RichEditor-root">
-        <BlockStyleControls
-          editorState={editorState}
-          onToggle={this.toggleBlockType}
-        />
-        <InlineStyleControls
-          editorState={editorState}
-          onToggle={this.toggleInlineStyle}
-        />
-        <div className={className} onClick={this.focus}>
-          <Editor
-            ref={this.myRef}
-            blockStyleFn={getBlockStyle}
-            customStyleMap={styleMap}
+      <Fragment>
+        <div className="RichEditor-root">
+          <BlockStyleControls
             editorState={editorState}
-            handleKeyCommand={this.handleKeyCommand}
-            keyBindingFn={this.mapKeyToEditorCommand}
-            onChange={this.onChange}
-            placeholder="Project Description"
-            spellCheck={true}
+            onToggle={this.toggleBlockType}
           />
+          <InlineStyleControls
+            editorState={editorState}
+            onToggle={this.toggleInlineStyle}
+          />
+          <div className={className} onClick={this.focus}>
+            <Editor
+              ref={this.myRef}
+              blockStyleFn={getBlockStyle}
+              customStyleMap={styleMap}
+              editorState={editorState}
+              handleKeyCommand={this.handleKeyCommand}
+              keyBindingFn={this.mapKeyToEditorCommand}
+              onChange={this.onChange}
+              placeholder="Project Description"
+              spellCheck={true}
+            />
+          </div>
         </div>
-      </div>
+        <div
+          style={{
+            display: "flex",
+            marginTop: "1rem",
+            justifyContent: "center",
+          }}
+        >
+          {Children.map(this.props.children, (child) => {
+            return React.cloneElement(child, {
+              onClick: () => this._onSubmit(),
+            });
+          })}
+        </div>
+      </Fragment>
     );
   }
 }
@@ -190,17 +221,19 @@ const InlineStyleControls = (props) => {
   const currentStyle = props.editorState.getCurrentInlineStyle();
 
   return (
-    <div className="RichEditor-controls">
-      {INLINE_STYLES.map((type) => (
-        <StyleButton
-          key={type.label}
-          active={currentStyle.has(type.style)}
-          label={type.label}
-          onToggle={props.onToggle}
-          style={type.style}
-        />
-      ))}
-    </div>
+    <Fragment>
+      <div className="RichEditor-controls">
+        {INLINE_STYLES.map((type) => (
+          <StyleButton
+            key={type.label}
+            active={currentStyle.has(type.style)}
+            label={type.label}
+            onToggle={props.onToggle}
+            style={type.style}
+          />
+        ))}
+      </div>
+    </Fragment>
   );
 };
 
