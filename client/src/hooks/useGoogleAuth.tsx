@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
-import { auth } from "./firebase-init";
-import { addUserAuth } from "./slices/profile-slice";
+import { auth } from "../firebase-init";
+import { addUserAuth } from "../slices/profile-slice";
 
 function useGoogleAuth() {
   const dispatch = useDispatch();

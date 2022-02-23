@@ -3,7 +3,6 @@ import {
   Card,
   CardContent,
   CardHeader,
-  Container,
   Grid,
   InputAdornment,
   TextareaAutosize,
@@ -12,9 +11,9 @@ import {
 import Paper from "@mui/material/Paper";
 import { makeStyles } from "@mui/styles";
 import React from "react";
-import { Col, Row } from "react-bootstrap";
+import { Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { addProfileDetailsByName } from "../slices/profile-slice";
+import { addProfileDetailsByName } from "../../slices/profile-slice";
 
 const useStyles: Function = makeStyles((theme: any) => ({
   margin: {
@@ -91,34 +90,6 @@ function Profile() {
               onChange={handleChange}
             />
           </Row>
-          <Container className={classes.margin}>
-            <Row>
-              <Col lg={3} xs={0} />
-              <Col lg={3} xs={5}>
-                {/* TODO */}
-                {/* <Button
-                  variant="contained"
-                  color="secondary"
-                  onClick={nextStep}
-                  disabled
-                  startIcon={<NavigateBeforeIcon />}
-                >
-                  Back
-                </Button> */}
-              </Col>
-              <Col lg={3} xs={5}>
-                {/* <Button
-                  variant="contained"
-                  color="secondary"
-                  onClick={continueVal}
-                  endIcon={<NavigateNextIcon />}
-                >
-                  Next
-                </Button> */}
-              </Col>
-              <Col lg={3} xs={1} />
-            </Row>
-          </Container>
           {/* <Button
             variant="contained"
             color="secondary"

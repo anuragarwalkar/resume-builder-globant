@@ -4,10 +4,10 @@ import { Button } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { nextStep, prevStep } from "../../slices/step-slice";
 import Education from "../education/Education.component";
-import Experience from "../Experience";
-import Profile from "../Profile";
-import Projects from "../Projects";
-import Skills from "../Skills";
+import Experience from "../experience/Experience";
+import Profile from "../profile/Profile";
+import Projects from "../projects/Projects";
+import Skills from "../skills/Skills";
 
 function CVEditor() {
   const { step, preBtnEnabled, nextBtnEnabled } = useSelector(

@@ -1,9 +1,9 @@
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import "./App.css";
+import "./App.scss";
 import Home from "./components/home/home.component";
-import { PrivateRoute, PublicRoute } from "./components/utils";
-import useGoogleAuth from "./useGoogleAuth";
+import { PrivateRoute, PublicRoute } from "./components/utils/util.component";
+import useGoogleAuth from "./hooks/useGoogleAuth";
 
 const theme = createTheme({
   palette: {
