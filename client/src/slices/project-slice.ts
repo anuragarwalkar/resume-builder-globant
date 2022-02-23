@@ -10,7 +10,7 @@ const projectSlice = createSlice({
   initialState,
   reducers: {
     addAProject: (state, action) => {
-      state.project.projects = state.project.projects.shift(action.payload);
+      state.projects.unshift({ ...action.payload, id: new Date().toString() });
     },
   },
 });

@@ -1,3 +1,4 @@
+import parse from "html-react-parser";
 import { Fragment } from "react";
 import { useAppSelector } from "../../app/hooks";
 import "./resumeStyles.css";
@@ -7,7 +8,7 @@ function ProjectView({ name, description }: any) {
     <div className="section__list">
       <div className="section__list-item">
         <div className="name">{name}</div>
-        <div className="text">\{description}</div>
+        <div className="text">{parse(description)}</div>
       </div>
     </div>
   );
@@ -100,7 +101,8 @@ function ResumeView() {
           {projects.map((project: any) => {
             return (
               <ProjectView
-                name={project.name}
+                key={project.id}
+                name={project.title}
                 description={project.description}
               />
             );
