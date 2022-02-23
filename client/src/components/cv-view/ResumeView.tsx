@@ -42,10 +42,7 @@ function ResumeView() {
           </div>
 
           <div className="header__right">
-            <img
-              src="http://localhost:5500/globant_logo.png"
-              alt="Globant Logo"
-            />
+            <img src="/globant_logo_main.png" alt="Globant Logo" />
           </div>
         </div>
         <hr />

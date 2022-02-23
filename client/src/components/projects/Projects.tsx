@@ -1,4 +1,4 @@
-import DescriptionIcon from "@mui/icons-material/Description";
+// import DescriptionIcon from "@mui/icons-material/Description";
 import LinkIcon from "@mui/icons-material/Link";
 import TitleIcon from "@mui/icons-material/Title";
 import {
@@ -9,8 +9,19 @@ import {
   Paper,
   TextField,
 } from "@mui/material";
+import { Editor, EditorState } from "draft-js";
+import "draft-js/dist/Draft.css";
+import { useState } from "react";
 import { useAppSelector } from "../../app/hooks";
 import "./projects.styles.scss";
+
+function MyEditor() {
+  const [editorState, setEditorState] = useState(() =>
+    EditorState.createEmpty()
+  );
+
+  return <Editor editorState={editorState} onChange={setEditorState} />;
+}
 
 function Projects() {
   const [project] = useAppSelector((state) => state.project.projects);
@@ -56,7 +67,7 @@ function Projects() {
             }}
           />
 
-          <TextField
+          {/* <TextField
             margin="dense"
             variant="outlined"
             name="projectDescription"
@@ -72,7 +83,8 @@ function Projects() {
                 </InputAdornment>
               ),
             }}
-          />
+          /> */}
+          <MyEditor />
         </div>
       </CardContent>
     </Paper>
