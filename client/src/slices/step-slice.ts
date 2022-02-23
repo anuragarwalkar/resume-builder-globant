@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState: any = {
   step: 1,
-  maxStepCount: 5,
+  maxStepCount: 6,
   nextBtnEnabled: true,
   preBtnEnabled: false,
 };

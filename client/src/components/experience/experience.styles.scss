@@ -1,0 +1,18 @@
+.cv-editor-experience {
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 10px;
+
+    .MuiSvgIcon-root {
+      margin-right: 10px;
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+}

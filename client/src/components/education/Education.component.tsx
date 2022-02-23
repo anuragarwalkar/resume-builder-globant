@@ -4,7 +4,6 @@ import {
   Card,
   CardContent,
   CardHeader,
-  Divider,
   Grid,
   InputAdornment,
   Paper,
@@ -123,8 +122,6 @@ function Profile() {
               />
             </Grid>
           </Grid>
-          <br />
-          <Divider />
         </div>
       </CardContent>
     </Paper>

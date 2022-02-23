@@ -1,12 +1,12 @@
 import { Toolbar, Typography } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
-import React from "react";
 import CVEditor from "../cv-editor/cv-editor.component";
 import ResumeView from "../cv-view/ResumeView";
+import "./home.styles.scss";
 
 function Home() {
   return (
-    <div>
+    <div className="home">
       <AppBar position="static">
         <Toolbar>
           <img
@@ -20,8 +20,8 @@ function Home() {
           </Typography>
         </Toolbar>
       </AppBar>
-      <div style={{ display: "flex" }}>
-        <div style={{ flex: 0.5, marginTop: "5%" }}>
+      <div className="home__content">
+        <div style={{ flex: 0.47, marginTop: "2%" }}>
           <CVEditor />
         </div>
         <div style={{ flex: 0.5, padding: "20px" }}>
