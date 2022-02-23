@@ -9,22 +9,13 @@ import {
   Paper,
   TextField,
 } from "@mui/material";
-import { Editor, EditorState } from "draft-js";
-import "draft-js/dist/Draft.css";
-import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { useAppSelector } from "../../app/hooks";
-import "./projects.styles.scss";
-
-function MyEditor() {
-  const [editorState, setEditorState] = useState(() =>
-    EditorState.createEmpty()
-  );
-
-  return <Editor editorState={editorState} onChange={setEditorState} />;
-}
+import RichTextEditor from "../rich-text-editor/RichTextEditor";
 
 function Projects() {
   const [project] = useAppSelector((state) => state.project.projects);
+  const dispatch = useDispatch();
 
   return (
     <Paper>
@@ -66,25 +57,7 @@ function Projects() {
               ),
             }}
           />
-
-          {/* <TextField
-            margin="dense"
-            variant="outlined"
-            name="projectDescription"
-            label="Description"
-            style={{ width: "80%" }}
-            required
-            value={project.projectDescription}
-            onChange={() => {}}
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="start">
-                  <DescriptionIcon />
-                </InputAdornment>
-              ),
-            }}
-          /> */}
-          <MyEditor />
+          <RichTextEditor onChangeHtml={(data: any) => {}} />
         </div>
       </CardContent>
     </Paper>

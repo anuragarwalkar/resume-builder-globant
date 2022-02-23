@@ -1,12 +1,24 @@
 import { Fragment } from "react";
-import { useSelector } from "react-redux";
+import { useAppSelector } from "../../app/hooks";
 import "./resumeStyles.css";
 
-function ResumeView() {
-  const { name, email, description } = useSelector(
-    (state: any) => state.profile.details
+function ProjectView({ name, description }: any) {
+  return (
+    <div className="section__list">
+      <div className="section__list-item">
+        <div className="name">{name}</div>
+        <div className="text">\{description}</div>
+      </div>
+    </div>
   );
-  const skills = useSelector((state: any) => state.extra.skills);
+}
+
+function ResumeView() {
+  const { name, email, description } = useAppSelector(
+    (state) => state.profile.details
+  );
+  const skills = useAppSelector((state) => state.extra.skills);
+  const projects = useAppSelector((state) => state.project.projects);
 
   const getRating = (skill: any) => {
     const items = new Array(skill.totalRating).fill(null);
@@ -85,17 +97,14 @@ function ResumeView() {
 
         <div className="section">
           <div className="section__title">Projects</div>
-          <div className="section__list">
-            <div className="section__list-item">
-              <div className="name">Lorem ipsum</div>
-              <div className="text">
-                I am a front-end developer with more than 3 years of experience
-                writing html, css, and js. I'm motivated, result-focused and
-                seeking a successful team-oriented company with opportunity to
-                grow.
-              </div>
-            </div>
-          </div>
+          {projects.map((project: any) => {
+            return (
+              <ProjectView
+                name={project.name}
+                description={project.description}
+              />
+            );
+          })}
         </div>
         <div className="section">
           <div className="section__title">Interests</div>
