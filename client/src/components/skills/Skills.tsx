@@ -3,12 +3,12 @@ import {
   CardContent,
   CardHeader,
   Chip,
-  InputAdornment,
   Paper,
   Stack,
   TextField,
 } from "@mui/material";
 import { useSelector } from "react-redux";
+import { AppRating } from "../../hoc/ProjectView.utils";
 import "./skills.styles.scss";
 
 function Skills() {
@@ -28,14 +28,13 @@ function Skills() {
           </Stack>
           <TextField
             margin="dense"
-            variant="outlined"
+            variant="standard"
             name="skill"
             label="Add Skill"
             style={{ width: "30%" }}
-            InputProps={{
-              endAdornment: <InputAdornment position="start" />,
-            }}
           />
+
+          <AppRating name="new" totalRating={5} rating={2} disabled={false} />
         </div>
       </CardContent>
     </Paper>

@@ -1,6 +1,6 @@
 import parse from "html-react-parser";
-import { Fragment } from "react";
 import { useAppSelector } from "../../app/hooks";
+import { AppRating } from "../../hoc/ProjectView.utils";
 import "./resumeStyles.css";
 
 function ProjectView({ name, description }: any) {
@@ -20,25 +20,6 @@ function ResumeView() {
   );
   const skills = useAppSelector((state) => state.extra.skills);
   const projects = useAppSelector((state) => state.project.projects);
-
-  const getRating = (skill: any) => {
-    const items = new Array(skill.totalRating).fill(null);
-
-    return items.map((_, index) => {
-      return (
-        <Fragment key={`${skill.name}-${index}`}>
-          <input
-            id={`${skill.name}-${index}`}
-            type="checkbox"
-            defaultChecked={index + 1 <= skill.rating}
-            readOnly
-            disabled
-          />
-          <label htmlFor={`${skill.name}-${index}`}></label>
-        </Fragment>
-      );
-    });
-  };
 
   return (
     <div className="resume-container">
@@ -73,7 +54,11 @@ function ResumeView() {
                   <div className="left">
                     <div className="name">{skill.name}</div>
                   </div>
-                  <div className="right">{getRating(skill)}</div>
+                  <AppRating
+                    name={skill.name}
+                    totalRating={skill.totalRating}
+                    rating={skill.rating}
+                  />
                 </div>
               );
             })}
