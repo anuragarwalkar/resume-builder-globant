@@ -11,7 +11,6 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useAppSelector } from "../../app/hooks";
 import { addAProject } from "../../slices/project-slice";
 import RichTextEditor from "../rich-text-editor/RichTextEditor";
 import "./projects.styles.scss";
@@ -23,7 +22,7 @@ const initialFormState = {
 };
 
 function Projects() {
-  const [_] = useAppSelector((state) => state.project.projects);
+  // const [_] = useAppSelector((state) => state.project.projects);
   const [project, setProjectData] = useState(initialFormState);
 
   const dispatch = useDispatch();

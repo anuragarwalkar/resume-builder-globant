@@ -1,6 +1,6 @@
 import parse from "html-react-parser";
 import { useAppSelector } from "../../app/hooks";
-import { AppRating } from "../../hoc/ProjectView.utils";
+import { AppRating } from "../../hoc/app-rating.component";
 import "./resumeStyles.css";
 
 function ProjectView({ name, description }: any) {

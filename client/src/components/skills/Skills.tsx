@@ -1,18 +1,45 @@
+import SendIcon from "@mui/icons-material/Send";
 import {
   Card,
   CardContent,
   CardHeader,
   Chip,
+  IconButton,
   Paper,
   Stack,
   TextField,
 } from "@mui/material";
-import { useSelector } from "react-redux";
-import { AppRating } from "../../hoc/ProjectView.utils";
+import { useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { AppRating } from "../../hoc/app-rating.component";
+import { addSkills } from "../../slices/extra-slice";
 import "./skills.styles.scss";
 
 function Skills() {
   const skills = useSelector((state: any) => state.extra.skills);
+  const [skill, setSkill] = useState("");
+  const rating = useRef({ rating: 0, totalRating: 5 });
+  const ratingRef = useRef<any>();
+  const dispatch = useDispatch();
+
+  const changeData = (e: any) => {
+    setSkill(e.target.value);
+  };
+
+  const onChangeRating = (val: number) => {
+    rating.current.rating = val;
+  };
+
+  const onSubmit = () => {
+    dispatch(addSkills({ name: skill, ...rating.current }));
+    reset();
+  };
+
+  const reset = () => {
+    rating.current.rating = 0;
+    setSkill("");
+    ratingRef.current.resetItems();
+  };
 
   return (
     <Paper>
@@ -26,15 +53,33 @@ function Skills() {
               return <Chip key={skill.id} label={skill.name} color="primary" />;
             })}
           </Stack>
-          <TextField
-            margin="dense"
-            variant="standard"
-            name="skill"
-            label="Add Skill"
-            style={{ width: "30%" }}
-          />
+          <div className="cv-editor__skills__input">
+            <div className="cv-editor__skills__text">
+              <TextField
+                margin="dense"
+                variant="standard"
+                name="skill"
+                label="Skill"
+                value={skill}
+                onChange={changeData}
+                style={{ width: "100%" }}
+              />
+            </div>
 
-          <AppRating name="new" totalRating={5} rating={2} disabled={false} />
+            <div className="cv-editor__skills__rating">
+              <AppRating
+                onChangeRating={onChangeRating}
+                name="new"
+                ref={ratingRef}
+                totalRating={5}
+                rating={rating.current.rating}
+                disabled={false}
+              />
+            </div>
+            <IconButton onClick={onSubmit}>
+              <SendIcon color="primary" />
+            </IconButton>
+          </div>
         </div>
       </CardContent>
     </Paper>
