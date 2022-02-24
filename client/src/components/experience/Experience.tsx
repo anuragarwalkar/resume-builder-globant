@@ -1,9 +1,9 @@
 import BusinessIcon from "@mui/icons-material/Business";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import DescriptionIcon from "@mui/icons-material/Description";
 import EventSeatIcon from "@mui/icons-material/EventSeat";
-import TimelapseIcon from "@mui/icons-material/Timelapse";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
 import {
+  Button,
   Card,
   CardContent,
   CardHeader,
@@ -11,11 +11,39 @@ import {
   Paper,
   TextField,
 } from "@mui/material";
-import { useSelector } from "react-redux";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addAExperience } from "../../slices/experience-slice";
 import "./experience.styles.scss";
 
+const initialFormState = {
+  organization: "",
+  position: "",
+  description: "",
+  to: "",
+  from: "",
+  location: "",
+};
 function Experience() {
-  const [values] = useSelector((state: any) => state.experience.experiences);
+  // const [values] = useAppSelector((state) => state.experience.experiences);
+  const dispatch = useDispatch();
+
+  const [formData, setFormData] = useState(initialFormState);
+
+  const setValues = (e: any) => {
+    const { name, value } = e.target;
+    setFormData((data: any) => {
+      return {
+        ...data,
+        [name]: value,
+      };
+    });
+  };
+
+  const onAddProject = () => {
+    dispatch(addAExperience(formData));
+    setFormData(initialFormState);
+  };
 
   return (
     <Paper>
@@ -24,19 +52,16 @@ function Experience() {
       </Card>
       <CardContent>
         <div className="cv-editor-experience">
-          <div className="cv-editor-experience__header">
-            <CheckCircleIcon />
-            <span className="pl-3">Experience 1</span>
-          </div>
           <div className="cv-editor-experience__content">
             <TextField
               margin="dense"
-              variant="outlined"
-              name="institute"
+              variant="standard"
+              name="organization"
               label="Organisation"
               style={{ width: "45%" }}
               required
-              value={values.institute}
+              value={formData.organization}
+              onChange={setValues}
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="start">
@@ -47,12 +72,13 @@ function Experience() {
             />
             <TextField
               margin="dense"
-              variant="outlined"
+              variant="standard"
               name="position"
               label="Position"
               style={{ width: "45%" }}
               required
-              value={values.position}
+              value={formData.position}
+              onChange={setValues}
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="start">
@@ -63,17 +89,48 @@ function Experience() {
             />
 
             <TextField
-              margin="dense"
-              variant="outlined"
-              name="duration"
-              label="Duration"
-              style={{ width: "45%" }}
+              id="from"
+              label="Duration From"
+              name="from"
+              type="date"
               required
-              value={values.duration}
+              variant="standard"
+              sx={{ width: "45%" }}
+              value={formData.from}
+              onChange={setValues}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+
+            <TextField
+              id="to"
+              label="Duration To"
+              name="to"
+              type="date"
+              required
+              variant="standard"
+              sx={{ width: "45%" }}
+              value={formData.to}
+              onChange={setValues}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+
+            <TextField
+              margin="dense"
+              label="Location"
+              variant="standard"
+              style={{ width: "45%" }}
+              name="location"
+              required
+              value={formData.location}
+              onChange={setValues}
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="start">
-                    <TimelapseIcon />
+                    <LocationOnIcon />
                   </InputAdornment>
                 ),
               }}
@@ -82,11 +139,12 @@ function Experience() {
             <TextField
               margin="dense"
               label="Description"
-              variant="outlined"
+              variant="standard"
               style={{ width: "45%" }}
-              name="experienceDescription"
+              name="description"
               required
-              value={values.experienceDescription}
+              value={formData.description}
+              onChange={setValues}
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="start">
@@ -95,6 +153,10 @@ function Experience() {
                 ),
               }}
             />
+
+            <Button variant="contained" onClick={onAddProject} color="primary">
+              Add Experience
+            </Button>
           </div>
         </div>
       </CardContent>

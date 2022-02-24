@@ -1,16 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { v4 as uuidv4 } from "uuid";
 
+// { institute: "", position: "", duration: "", experienceDescription: "" }
 const initialState: any = {
-  experiences: [
-    { institute: "", position: "", duration: "", experienceDescription: "" },
-  ],
+  experiences: [],
 };
 const experienceSlice = createSlice({
   name: "experience",
   initialState,
   reducers: {
     addAExperience: (state: any, action) => {
-      state.experiences.shift(action.payload);
+      state.experiences.unshift({ ...action.payload, id: uuidv4() });
     },
   },
 });

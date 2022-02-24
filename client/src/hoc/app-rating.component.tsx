@@ -49,32 +49,31 @@ export const AppRating = forwardRef(
       }
     }, [items, onChangeRating]);
 
-    const onChangeInput = (e: any) => {
+    const onChangeInput = (index: any, e: any) => {
       const { id } = e.target;
 
       setItems((data: any) => {
         const clonedData = [...data];
-        return clonedData.map((item: any) => {
+        return clonedData.map((item: any, inIndex: number) => {
           const clonedItem = {
             ...item,
           };
-          if (clonedItem.id === id) {
-            clonedItem.checked = !clonedItem.checked;
-          }
+
+          clonedItem.checked = inIndex <= index;
 
           return clonedItem;
         });
       });
     };
 
-    const allCheckbox = items.map((item: any) => {
+    const allCheckbox = items.map((item: any, index: number) => {
       return (
         <Fragment key={`${name}-${item.id}`}>
           <input
             id={item.id}
             type="checkbox"
             checked={item.checked}
-            onChange={onChangeInput}
+            onChange={onChangeInput.bind(null, index)}
             disabled={disabled}
           />
           <label htmlFor={item.id}></label>

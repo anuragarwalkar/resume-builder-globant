@@ -18,7 +18,7 @@ const extraSlice = createSlice({
       });
     },
     addIntrests: (state: any, action) => {
-      state.interests.unshift({
+      state.interests.push({
         ...action.payload,
         id: uuidv4(),
       });

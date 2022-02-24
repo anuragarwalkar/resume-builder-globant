@@ -1,127 +1,127 @@
-import DateRangeIcon from "@mui/icons-material/DateRange";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
 import SchoolIcon from "@mui/icons-material/School";
 import {
+  Button,
   Card,
   CardContent,
   CardHeader,
-  Grid,
   InputAdornment,
   Paper,
   TextField,
 } from "@mui/material";
-import { makeStyles } from "@mui/styles";
-import { useSelector } from "react-redux";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addEducation } from "../../slices/education-slice";
+import "./education.styles.scss";
 
-const useStyles: Function = makeStyles((theme: any) => ({
-  margin: {
-    margin: theme.spacing(1.5),
-  },
-  padding: {
-    padding: theme.spacing(1.5),
-  },
-}));
+const educationInitialState = {
+  collegeUniversity: "",
+  fromYear: "",
+  toYear: "",
+  qualification: "",
+  location: "",
+};
 
 function Profile() {
-  const classes = useStyles();
-  const values = useSelector((state: any) => state.education);
+  // const values = useAppSelector((state) => state.education);
+  const [formData, setFormData] = useState(educationInitialState);
+  const dispatch = useDispatch();
 
-  const onChangeInput = () => {};
+  const onChangeInput = (e: any) => {
+    const { name, value } = e.target;
+    setFormData((data: any) => {
+      return {
+        ...data,
+        [name]: value,
+      };
+    });
+  };
+
+  const onAddProject = () => {
+    dispatch(addEducation(formData));
+    setFormData(educationInitialState);
+  };
 
   return (
-    <Paper className={classes.padding}>
+    <Paper>
       <Card>
         <CardHeader title="Education Details" />
       </Card>
       <CardContent>
-        <div className={classes.margin}>
-          <Grid container spacing={2} alignItems="center">
-            <Grid item md={4} sm={12} xs={12} lg={4}>
-              <TextField
-                margin="dense"
-                variant="outlined"
-                name="college"
-                label="College/Unviersity"
-                style={{ width: "80%" }}
-                required
-                value={values.college}
-                onChange={onChangeInput}
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position="start">
-                      <SchoolIcon />
-                    </InputAdornment>
-                  ),
-                }}
-              />
-            </Grid>
-            <Grid item md={4} sm={6} xs={12} lg={4}>
-              <TextField
-                margin="dense"
-                variant="outlined"
-                name="fromYear"
-                label="From Year"
-                type="date"
-                style={{ width: "80%" }}
-                required
-                value={values.fromYear}
-                onChange={onChangeInput}
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position="start">
-                      <DateRangeIcon />
-                    </InputAdornment>
-                  ),
-                }}
-              />
-            </Grid>
+        <div className="cv-editor__education">
+          <div className="cv-editor__education__content">
+            <TextField
+              margin="dense"
+              variant="outlined"
+              name="collegeUniversity"
+              label="College/Unviersity"
+              style={{ width: "45%" }}
+              required
+              value={formData.collegeUniversity}
+              onChange={onChangeInput}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="start">
+                    <SchoolIcon />
+                  </InputAdornment>
+                ),
+              }}
+            />
 
-            <Grid item md={4} sm={6} xs={12} lg={4}>
-              <TextField
-                margin="dense"
-                variant="outlined"
-                name="toYear"
-                type="date"
-                label="To Year"
-                style={{ width: "80%" }}
-                required
-                value={values.toYear}
-                onChange={onChangeInput}
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position="start">
-                      <DateRangeIcon />
-                    </InputAdornment>
-                  ),
-                }}
-              />
-            </Grid>
+            <TextField
+              margin="dense"
+              label="Qualification"
+              variant="outlined"
+              value={formData.qualification}
+              style={{ width: "45%" }}
+              name="qualification"
+              required
+              onChange={onChangeInput}
+            />
 
-            <Grid item md={4} sm={12} xs={12} lg={4}>
-              <TextField
-                margin="dense"
-                label="Qualification"
-                variant="outlined"
-                style={{ width: "80%" }}
-                name="qualification"
-                required
-                value={values.qualification}
-                onChange={onChangeInput}
-              />
-            </Grid>
+            <TextField
+              margin="dense"
+              variant="outlined"
+              name="fromYear"
+              type="date"
+              style={{ width: "45%" }}
+              required
+              value={formData.fromYear}
+              onChange={onChangeInput}
+            />
 
-            <Grid item md={8} sm={12} xs={12} lg={8}>
-              <TextField
-                margin="dense"
-                label="Description"
-                variant="outlined"
-                style={{ width: "90%" }}
-                name="description"
-                required
-                value={values.description}
-                onChange={onChangeInput}
-              />
-            </Grid>
-          </Grid>
+            <TextField
+              margin="dense"
+              variant="outlined"
+              name="toYear"
+              type="date"
+              style={{ width: "45%" }}
+              required
+              value={formData.toYear}
+              onChange={onChangeInput}
+            />
+
+            <TextField
+              margin="dense"
+              label="Location"
+              variant="outlined"
+              style={{ width: "45%" }}
+              name="location"
+              required
+              value={formData.location}
+              onChange={onChangeInput}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="start">
+                    <LocationOnIcon />
+                  </InputAdornment>
+                ),
+              }}
+            />
+          </div>
+          <Button variant="contained" onClick={onAddProject} color="primary">
+            Add Education
+          </Button>
         </div>
       </CardContent>
     </Paper>

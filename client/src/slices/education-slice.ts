@@ -1,38 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { v4 as uuidv4 } from "uuid";
 
 const initialState: any = {
-  colleges: [
-    {
-      college: "",
-      fromYear: "",
-      toYear: "",
-      qualification: "",
-      description: "",
-    },
-  ],
-  schools: [
-    {
-      school: "",
-      fromYear: "",
-      toYear: "",
-      qualification: "",
-      description: "",
-    },
-  ],
+  educations: [],
 };
 const educationSlice = createSlice({
   name: "education",
   initialState,
   reducers: {
-    addEducationSchool: (state: any, action) => {
-      state.schools = state.education.schools.shift(action.payload);
-    },
-    addEducationCollage: (state: any, action) => {
-      state.colleges = state.education.colleges.shift(action.payload);
+    addEducation: (state: any, action) => {
+      state.educations.unshift({ ...action.payload, id: uuidv4() });
     },
   },
 });
 
-export const { addEducationCollage, addEducationSchool } =
-  educationSlice.actions;
+export const { addEducation } = educationSlice.actions;
 export default educationSlice.reducer;

@@ -1,7 +1,33 @@
 import parse from "html-react-parser";
+import moment from "moment";
+import { useMemo } from "react";
 import { useAppSelector } from "../../app/hooks";
 import { AppRating } from "../../hoc/app-rating.component";
 import "./resumeStyles.css";
+
+function EducationView({ collegeUniversity, location, fromYear, toYear }: any) {
+  const formatedFrom = useMemo(
+    () => moment(new Date(fromYear)).format("MMM yyy"),
+    [fromYear]
+  );
+  const formatedTo = useMemo(
+    () => moment(new Date(toYear)).format("MMM yyy"),
+    [toYear]
+  );
+  return (
+    <div className="section__list-item">
+      <div className="left">
+        <div className="name">{collegeUniversity}</div>
+        <div className="addr">{location}</div>
+      </div>
+      <div className="right">
+        <div className="education__duration">
+          {formatedFrom} - {formatedTo}
+        </div>
+      </div>
+    </div>
+  );
+}
 
 function ProjectView({ name, description }: any) {
   return (
@@ -14,12 +40,49 @@ function ProjectView({ name, description }: any) {
   );
 }
 
+function ExperienceView({
+  organization,
+  location,
+  from,
+  to,
+  position,
+  description,
+}: any) {
+  const formatedFrom = useMemo(
+    () => moment(new Date(from)).format("MMM yyy"),
+    [from]
+  );
+  const formatedTo = useMemo(
+    () => moment(new Date(to)).format("MMM yyy"),
+    [to]
+  );
+
+  return (
+    <div className="section__list-item">
+      <div className="left">
+        <div className="name">{organization}</div>
+        <div className="addr">{location}</div>
+        <div className="duration">
+          {formatedFrom} - {formatedTo}
+        </div>
+      </div>
+      <div className="right">
+        <div className="name">{position}</div>
+        <div className="desc">{description}</div>
+      </div>
+    </div>
+  );
+}
+
 function ResumeView() {
   const { name, email, description } = useAppSelector(
     (state) => state.profile.details
   );
   const skills = useAppSelector((state) => state.extra.skills);
   const projects = useAppSelector((state) => state.project.projects);
+  const experiences = useAppSelector((state) => state.experience.experiences);
+  const educations = useAppSelector((state) => state.education.educations);
+  const interests = useAppSelector((state) => state.extra.interests);
 
   return (
     <div className="resume-container">
@@ -67,17 +130,9 @@ function ResumeView() {
         <div className="section">
           <div className="section__title">Experience</div>
           <div className="section__list">
-            <div className="section__list-item">
-              <div className="left">
-                <div className="name">KlowdBox</div>
-                <div className="addr">San Fr, CA</div>
-                <div className="duration">Jan 2011 - Feb 2015</div>
-              </div>
-              <div className="right">
-                <div className="name">UI Developer</div>
-                <div className="desc">React/Angular</div>
-              </div>
-            </div>
+            {experiences.map((experience: any) => {
+              return <ExperienceView key={experience.id} {...experience} />;
+            })}
           </div>
         </div>
 
@@ -96,22 +151,23 @@ function ResumeView() {
         <div className="section">
           <div className="section__title">Interests</div>
           <div className="section__list">
-            <div className="section__list-item">Football, programming.</div>
+            <div className="section__list-item">
+              {interests.map((interest: any, index: number) => (
+                <span key={interest.id}>
+                  {interest.name}
+                  {index + 1 === interests.length ? "." : ", "}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
 
         <div className="section">
           <div className="section__title">Education</div>
           <div className="section__list">
-            <div className="section__list-item">
-              <div className="left">
-                <div className="name">Sample Institute of technology</div>
-                <div className="addr">San Fr, CA</div>
-              </div>
-              <div className="right">
-                <div className="education__duration">Jan 2011 - Feb 2015</div>
-              </div>
-            </div>
+            {educations.map((education: any) => {
+              return <EducationView key={education.id} {...education} />;
+            })}
           </div>
         </div>
       </div>
