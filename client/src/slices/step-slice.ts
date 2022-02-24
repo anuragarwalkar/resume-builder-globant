@@ -46,6 +46,7 @@ const stepSlice = createSlice({
       const step = (stepsMapper as any)[stepName];
       if (step) {
         state.step = step;
+        runOnStep(state);
       }
     },
   },
