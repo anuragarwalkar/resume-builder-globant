@@ -32,7 +32,7 @@ function Profile() {
         <div className="cv-editor-profile">
           <TextField
             margin="dense"
-            variant="outlined"
+            variant="standard"
             name="name"
             label="Full Name"
             style={{ width: "40%" }}
@@ -44,7 +44,7 @@ function Profile() {
           <TextField
             margin="dense"
             label="Email"
-            variant="outlined"
+            variant="standard"
             name="email"
             required
             style={{ width: "40%" }}
