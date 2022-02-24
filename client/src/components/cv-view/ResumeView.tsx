@@ -1,8 +1,10 @@
 import parse from "html-react-parser";
 import moment from "moment";
 import { useMemo } from "react";
+import { useDispatch } from "react-redux";
 import { useAppSelector } from "../../app/hooks";
 import { AppRating } from "../../hoc/app-rating.component";
+import { navigateToScrren } from "../../slices/step-slice";
 import "./resumeStyles.css";
 
 function EducationView({ collegeUniversity, location, fromYear, toYear }: any) {
@@ -78,11 +80,19 @@ function ResumeView() {
   const { name, email, description } = useAppSelector(
     (state) => state.profile.details
   );
+  const dispatch = useDispatch();
   const skills = useAppSelector((state) => state.extra.skills);
   const projects = useAppSelector((state) => state.project.projects);
   const experiences = useAppSelector((state) => state.experience.experiences);
   const educations = useAppSelector((state) => state.education.educations);
   const interests = useAppSelector((state) => state.extra.interests);
+
+  const navigateTo = (e: any) => {
+    e.stopPropagation();
+    e.preventDefault();
+    const id = e.target.id;
+    dispatch(navigateToScrren(id));
+  };
 
   return (
     <div className="resume-container">
@@ -90,7 +100,9 @@ function ResumeView() {
         <div className="main__row">
           <div className="header__left">
             <div className="full-name">
-              <span className="first-name">{name}</span>
+              <span className="first-name" id="profile" onClick={navigateTo}>
+                {name}
+              </span>
             </div>
             <div className="contact-info">
               <span className="email">Email: </span>
@@ -109,7 +121,9 @@ function ResumeView() {
       </div>
       <div className="details">
         <div className="section">
-          <div className="section__title">Skills</div>
+          <div className="section__title" id="skills" onClick={navigateTo}>
+            Skills
+          </div>
           <div className="skills">
             {skills.map((skill: any) => {
               return (
@@ -128,7 +142,9 @@ function ResumeView() {
           </div>
         </div>
         <div className="section">
-          <div className="section__title">Experience</div>
+          <div className="section__title" id="experience" onClick={navigateTo}>
+            Experience
+          </div>
           <div className="section__list">
             {experiences.map((experience: any) => {
               return <ExperienceView key={experience.id} {...experience} />;
@@ -137,7 +153,9 @@ function ResumeView() {
         </div>
 
         <div className="section">
-          <div className="section__title">Projects</div>
+          <div className="section__title" id="projects" onClick={navigateTo}>
+            Projects
+          </div>
           {projects.map((project: any) => {
             return (
               <ProjectView
@@ -149,7 +167,9 @@ function ResumeView() {
           })}
         </div>
         <div className="section">
-          <div className="section__title">Interests</div>
+          <div className="section__title" id="interests" onClick={navigateTo}>
+            Interests
+          </div>
           <div className="section__list">
             <div className="section__list-item">
               {interests.map((interest: any, index: number) => (
@@ -163,7 +183,9 @@ function ResumeView() {
         </div>
 
         <div className="section">
-          <div className="section__title">Education</div>
+          <div className="section__title" id="education" onClick={navigateTo}>
+            Education
+          </div>
           <div className="section__list">
             {educations.map((education: any) => {
               return <EducationView key={education.id} {...education} />;

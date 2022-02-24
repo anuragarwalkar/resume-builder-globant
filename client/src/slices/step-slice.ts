@@ -1,5 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const stepsMapper = {
+  profile: 1,
+  skills: 2,
+  experience: 3,
+  projects: 4,
+  interests: 5,
+  education: 6,
+};
+
 const initialState: any = {
   step: 1,
   maxStepCount: 6,
@@ -32,8 +41,15 @@ const stepSlice = createSlice({
       state.step--;
       runOnStep(state);
     },
+    navigateToScrren: (state, action) => {
+      const stepName: string = action.payload.toLowerCase();
+      const step = (stepsMapper as any)[stepName];
+      if (step) {
+        state.step = step;
+      }
+    },
   },
 });
 
-export const { nextStep, prevStep } = stepSlice.actions;
+export const { nextStep, prevStep, navigateToScrren } = stepSlice.actions;
 export default stepSlice.reducer;

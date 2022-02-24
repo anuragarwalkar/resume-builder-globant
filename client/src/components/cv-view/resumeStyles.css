@@ -118,3 +118,7 @@
 .section__list-item > .text > p {
   margin: 3px 0;
 }
+
+.section__title:hover {
+  cursor: pointer;
+}
