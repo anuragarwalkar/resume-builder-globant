@@ -50,8 +50,6 @@ export const AppRating = forwardRef(
     }, [items, onChangeRating]);
 
     const onChangeInput = (index: any, e: any) => {
-      const { id } = e.target;
-
       setItems((data: any) => {
         const clonedData = [...data];
         return clonedData.map((item: any, inIndex: number) => {
