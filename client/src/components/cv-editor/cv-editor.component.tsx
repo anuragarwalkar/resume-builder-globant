@@ -37,13 +37,11 @@ function CVEditor() {
       </Provider>
     );
 
-    console.log("html:", html);
-
     const doc = new jsPDF();
 
-    // doc.html(html, ());
+    // doc.html(html);
 
-    doc.save("my.pdf");
+    // doc.save("my.pdf");
   };
 
   const getComponent = () => {
