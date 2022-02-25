@@ -31,14 +31,17 @@ function CVEditor() {
     dispatch(prevStep());
   };
 
-  const onDownloadResume = () => {
+  const onDownloadResume = async () => {
     const body = renderToString(
       <Provider store={store}>
         <ResumeView />
       </Provider>
     );
 
-    axios.post("create-pdf", { body, styles: tempStyles });
+    await axios.post("http://localhost:5500/create-pdf", {
+      body,
+      styles: tempStyles,
+    });
   };
 
   const getComponent = () => {

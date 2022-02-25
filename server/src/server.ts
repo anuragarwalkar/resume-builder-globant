@@ -20,7 +20,7 @@ app.use(express.static("public"));
 // POST route for PDF generation....
 app.post("/create-pdf", async (req, res) => {
   const { body, styles } = req.body;
-  pdf.create(pdfTemplate(styles, body), options).toFile("Resume.pdf");
+  pdf.create(pdfTemplate(styles, body), options).toFile("resume.pdf");
   res.send(true);
   // const file = `${__dirname}/Resume.pdf`;
   //   res.download(file);
