@@ -1,8 +1,13 @@
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import DownloadIcon from "@mui/icons-material/Download";
 import { Button } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
+import { jsPDF } from "jspdf";
+import { renderToString } from "react-dom/server";
+import { Provider, useDispatch, useSelector } from "react-redux";
+import { store } from "../../app/store";
 import { nextStep, prevStep } from "../../slices/step-slice";
+import ResumeView from "../cv-view/ResumeView";
 import Education from "../education/Education.component";
 import Experience from "../experience/Experience";
 import Interests from "../interets/interest.component";
@@ -23,6 +28,22 @@ function CVEditor() {
 
   const onPrevStep = () => {
     dispatch(prevStep());
+  };
+
+  const onDownloadResume = () => {
+    const html = renderToString(
+      <Provider store={store}>
+        <ResumeView />
+      </Provider>
+    );
+
+    console.log("html:", html);
+
+    const doc = new jsPDF();
+
+    // doc.html(html, ());
+
+    doc.save("my.pdf");
   };
 
   const getComponent = () => {
@@ -65,6 +86,16 @@ function CVEditor() {
           disabled={!nextBtnEnabled}
         >
           Next
+        </Button>
+      </div>
+      <div style={{ marginTop: "30px" }}>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={onDownloadResume}
+          endIcon={<DownloadIcon />}
+        >
+          Download
         </Button>
       </div>
     </div>

@@ -35,8 +35,3 @@ export function App() {
 }
 
 export default App;
-
-// const onDownloadResume = () => {
-//   const html = renderToStaticMarkup(<ResumeView />);
-//   console.log(html);
-// };
