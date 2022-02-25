@@ -8,7 +8,7 @@ const app = express();
 
 const options: any = {
   height: "42cm",
-  width: "29.7cm",
+  width: "23cm",
   timeout: "6000",
 };
 
@@ -20,10 +20,15 @@ app.use(express.static("public"));
 // POST route for PDF generation....
 app.post("/create-pdf", async (req, res) => {
   const { body, styles } = req.body;
-  pdf.create(pdfTemplate(styles, body), options).toFile("resume.pdf");
-  res.send(true);
-  // const file = `${__dirname}/Resume.pdf`;
-  //   res.download(file);
+  pdf
+    .create(pdfTemplate(styles, body), options)
+    .toFile("resume.pdf", (err: any) => {
+      if (err) {
+        return;
+      }
+      const file = `${__dirname}/../resume.pdf`;
+      res.download(file);
+    });
 });
 
 const port = process.env.PORT || 5500;
