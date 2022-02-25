@@ -12,7 +12,12 @@ const template = (styles: string, body: string) => {
         rel="stylesheet"
         type="text/css"
       />
-      <style>${styles}</style>
+      <style>
+      ${styles}
+      body {
+        padding: 35px;
+      }
+      </style>
     </head>
     <body>${body}</body>
   </html>

@@ -2,6 +2,7 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import express from "express";
 import pdf from "html-pdf";
+import path from "path";
 import pdfTemplate from "./template/index";
 
 const app = express();
@@ -24,9 +25,10 @@ app.post("/create-pdf", async (req, res) => {
     .create(pdfTemplate(styles, body), options)
     .toFile("resume.pdf", (err: any) => {
       if (err) {
-        return;
+        return err;
       }
-      const file = `${__dirname}/../resume.pdf`;
+
+      const file = path.join(__dirname, "../resume.pdf");
       res.download(file);
     });
 });

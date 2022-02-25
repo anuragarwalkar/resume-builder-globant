@@ -3,9 +3,12 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import DownloadIcon from "@mui/icons-material/Download";
 import { Button } from "@mui/material";
 import axios from "axios";
+import { saveAs } from "file-saver";
 import { renderToString } from "react-dom/server";
-import { Provider, useDispatch, useSelector } from "react-redux";
+import { Provider, useDispatch } from "react-redux";
+import { useAppSelector } from "../../app/hooks";
 import { store } from "../../app/store";
+import environment from "../../environment";
 import { nextStep, prevStep } from "../../slices/step-slice";
 import ResumeView from "../cv-view/ResumeView";
 import { tempStyles } from "../cv-view/tempStyles";
@@ -18,8 +21,9 @@ import Skills from "../skills/Skills";
 import "./cv-editor.styles.scss";
 
 function CVEditor() {
-  const { step, preBtnEnabled, nextBtnEnabled } = useSelector(
-    (state: any) => state.step
+  const { name } = useAppSelector((state) => state.profile.details);
+  const { step, preBtnEnabled, nextBtnEnabled } = useAppSelector(
+    (state) => state.step
   );
   const dispatch = useDispatch();
 
@@ -38,10 +42,28 @@ function CVEditor() {
       </Provider>
     );
 
-    await axios.post("http://localhost:5500/create-pdf", {
-      body,
-      styles: tempStyles,
-    });
+    const res = await axios.post(
+      `${environment.url}/create-pdf`,
+      {
+        body,
+        styles: tempStyles,
+      },
+      { responseType: "blob" }
+    );
+
+    function camelCase(str: string) {
+      return str
+        .replace(/\s(.)/g, function ($1) {
+          return $1.toUpperCase();
+        })
+        .replace(/\s/g, "")
+        .replace(/^(.)/, function ($1) {
+          return $1.toLowerCase();
+        });
+    }
+
+    const pdfBlob = new Blob([res.data], { type: "application/pdf" });
+    saveAs(pdfBlob, `${camelCase(name)}-globant-cv.pdf`);
   };
 
   const getComponent = () => {
@@ -86,14 +108,14 @@ function CVEditor() {
           Next
         </Button>
       </div>
-      <div style={{ marginTop: "30px" }}>
+      <div className="cv-editor__download-button">
         <Button
           variant="contained"
           color="primary"
           onClick={onDownloadResume}
           endIcon={<DownloadIcon />}
         >
-          Download
+          download cv
         </Button>
       </div>
     </div>
