@@ -1,4 +1,10 @@
-export const tempStyles = `.container {
+export const tempStyles = `
+body {
+  font-family: "Lato";
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+.container {
     background: #fff;
     box-shadow: 1px 1px 2px #dad7d7;
     border-radius: 3px;
