@@ -25,7 +25,6 @@
     "firebase": "^9.6.7",
     "html-react-parser": "^1.4.8",
     "install": "^0.13.0",
-    "jspdf": "^2.5.1",
     "moment": "^2.29.1",
     "npm": "^8.5.1",
     "react": "^17.0.2",
