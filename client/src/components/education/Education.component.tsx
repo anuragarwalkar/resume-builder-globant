@@ -52,7 +52,7 @@ function Profile() {
           <div className="cv-editor__education__content">
             <TextField
               margin="dense"
-              variant="outlined"
+              variant="standard"
               name="collegeUniversity"
               label="College/Unviersity"
               style={{ width: "45%" }}
@@ -71,7 +71,7 @@ function Profile() {
             <TextField
               margin="dense"
               label="Qualification"
-              variant="outlined"
+              variant="standard"
               value={formData.qualification}
               style={{ width: "45%" }}
               name="qualification"
@@ -81,7 +81,7 @@ function Profile() {
 
             <TextField
               margin="dense"
-              variant="outlined"
+              variant="standard"
               name="fromYear"
               type="date"
               style={{ width: "45%" }}
@@ -92,7 +92,7 @@ function Profile() {
 
             <TextField
               margin="dense"
-              variant="outlined"
+              variant="standard"
               name="toYear"
               type="date"
               style={{ width: "45%" }}
@@ -104,7 +104,7 @@ function Profile() {
             <TextField
               margin="dense"
               label="Location"
-              variant="outlined"
+              variant="standard"
               style={{ width: "45%" }}
               name="location"
               required

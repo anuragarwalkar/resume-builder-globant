@@ -56,7 +56,7 @@ function Projects() {
           <div className="cv-editor-projects__content">
             <TextField
               margin="dense"
-              variant="outlined"
+              variant="standard"
               name="title"
               label="Title"
               style={{ width: "45%" }}
@@ -73,7 +73,7 @@ function Projects() {
             />
             <TextField
               margin="dense"
-              variant="outlined"
+              variant="standard"
               name="link"
               label="Link"
               style={{ width: "45%" }}
