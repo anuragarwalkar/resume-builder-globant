@@ -1,4 +1,4 @@
-module.exports = (styles, body) => {
+const template = (styles: string, body: string) => {
   let htmlTemplate = `
   <!DOCTYPE html>
   <html lang="en">
@@ -20,3 +20,5 @@ module.exports = (styles, body) => {
 	`;
   return htmlTemplate;
 };
+
+export default template;
