@@ -111,7 +111,10 @@ function ResumeView() {
           </div>
 
           <div className="header__right">
-            <img src="/globant_logo_main.png" alt="Globant Logo" />
+            <img
+              src="https://globant-cv-builder.web.app/globant_logo_main.png"
+              alt="Globant Logo"
+            />
           </div>
         </div>
         <hr />
