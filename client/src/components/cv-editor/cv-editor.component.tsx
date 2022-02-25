@@ -2,12 +2,13 @@ import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import DownloadIcon from "@mui/icons-material/Download";
 import { Button } from "@mui/material";
-import { jsPDF } from "jspdf";
+import axios from "axios";
 import { renderToString } from "react-dom/server";
 import { Provider, useDispatch, useSelector } from "react-redux";
 import { store } from "../../app/store";
 import { nextStep, prevStep } from "../../slices/step-slice";
 import ResumeView from "../cv-view/ResumeView";
+import { tempStyles } from "../cv-view/tempStyles";
 import Education from "../education/Education.component";
 import Experience from "../experience/Experience";
 import Interests from "../interets/interest.component";
@@ -31,17 +32,13 @@ function CVEditor() {
   };
 
   const onDownloadResume = () => {
-    const html = renderToString(
+    const body = renderToString(
       <Provider store={store}>
         <ResumeView />
       </Provider>
     );
 
-    const doc = new jsPDF();
-
-    // doc.html(html);
-
-    // doc.save("my.pdf");
+    axios.post("create-pdf", { body, styles: tempStyles });
   };
 
   const getComponent = () => {
