@@ -21,16 +21,14 @@ app.use(express.static("public"));
 // POST route for PDF generation....
 app.post("/create-pdf", async (req, res) => {
   const { body, styles } = req.body;
-  pdf
-    .create(pdfTemplate(styles, body), options)
-    .toFile("resume.pdf", (err: any) => {
-      if (err) {
-        return err;
-      }
+  const file = path.join(__dirname, "resume.pdf");
+  pdf.create(pdfTemplate(styles, body), options).toFile(file, (err: any) => {
+    if (err) {
+      return err;
+    }
 
-      const file = path.join(__dirname, "../resume.pdf");
-      res.download(file);
-    });
+    res.download(file);
+  });
 });
 
 const port = process.env.PORT || 5500;
