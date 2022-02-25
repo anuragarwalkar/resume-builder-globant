@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "scripts": {
     "client": "npm start --prefix client",
-    "start": "npm start --prefix server",
+    "start": {
+      "postinstall": "cd server && npm install"
+    },
     "build": "npm run build --prefix server",
     "install": "npm install --prefix server"
   },
