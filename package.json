@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "concurrently 'npm start --prefix client' 'nodemon server/src/server.ts'",
     "start": "node dist/server.js",
-    "build": "tsc -p server/"
+    "build": "tsc -p server/",
+    "deploy": "cd client && firebase deploy"
   },
   "author": "",
   "license": "ISC",
