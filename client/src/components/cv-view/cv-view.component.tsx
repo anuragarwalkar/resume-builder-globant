@@ -76,7 +76,7 @@ function ExperienceView({
   );
 }
 
-function ResumeView() {
+function CVView() {
   const { name, email, description } = useAppSelector(
     (state) => state.profile.details
   );
@@ -200,4 +200,4 @@ function ResumeView() {
   );
 }
 
-export default ResumeView;
+export default CVView;

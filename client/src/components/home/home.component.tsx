@@ -1,7 +1,7 @@
 import { Toolbar, Typography } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import CVEditor from "../cv-editor/cv-editor.component";
-import ResumeView from "../cv-view/ResumeView";
+import CVView from "../cv-view/cv-view.component";
 import "./home.styles.scss";
 
 function Home() {
@@ -25,7 +25,7 @@ function Home() {
           <CVEditor />
         </div>
         <div style={{ flex: 0.5, padding: "20px" }}>
-          <ResumeView />
+          <CVView />
         </div>
       </div>
     </div>
