@@ -17,7 +17,7 @@ const theme = createTheme({
 });
 
 export function App() {
-  const [{ token }] = useGoogleAuth();
+  const [{ token }, loading = true] = useGoogleAuth();
 
   return (
     <ThemeProvider theme={theme}>
@@ -27,7 +27,10 @@ export function App() {
             path="/"
             element={<PrivateRoute Component={Home} token={token} />}
           />
-          <Route path="/login" element={<PublicRoute token={token} />} />
+          <Route
+            path="/login"
+            element={<PublicRoute token={token} loading={loading} />}
+          />
         </Routes>
       </Router>
     </ThemeProvider>

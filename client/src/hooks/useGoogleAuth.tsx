@@ -7,6 +7,7 @@ function useGoogleAuth() {
   const dispatch = useDispatch();
   const authSub: any = useRef();
   const [gAuth, setAuth] = useState<any>({ token: null });
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     authSub.current = auth.onAuthStateChanged(async (user: any) => {
@@ -15,6 +16,7 @@ function useGoogleAuth() {
         dispatch(addUserAuth({ token, name, email, id }));
         setAuth({ token, name, email, id });
       }
+      setLoading(false);
     });
     return () => {
       if (authSub.current) {
@@ -22,7 +24,7 @@ function useGoogleAuth() {
       }
     };
   }, [dispatch]);
-  return [gAuth];
+  return [gAuth, loading];
 }
 
 export default useGoogleAuth;

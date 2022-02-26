@@ -5,6 +5,6 @@ export function PrivateRoute({ Component, token }: any) {
   return token ? <Component /> : <Navigate to="/login" />;
 }
 
-export function PublicRoute({ token }: any) {
-  return token ? <Navigate to="/" /> : <Login />;
+export function PublicRoute({ token, ...otherProps }: any) {
+  return token ? <Navigate to="/" /> : <Login {...otherProps} />;
 }
