@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { useAppSelector } from "../../app/hooks";
 import { AppRating } from "../../hoc/app-rating.component";
 import { navigateToScrren } from "../../slices/step-slice";
-import "./resumeStyles.css";
+import "./cv-view.styles.css";
 
 function EducationView({ collegeUniversity, location, fromYear, toYear }: any) {
   const formatedFrom = useMemo(
