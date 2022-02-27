@@ -8,9 +8,13 @@ import {
   TextField,
 } from "@mui/material";
 import Paper from "@mui/material/Paper";
+import { SyntheticEvent } from "react";
 import { useDispatch } from "react-redux";
 import { useAppSelector } from "../../app/hooks";
-import { addProfileDetailsByName } from "../../slices/profile-slice";
+import {
+  addProfileDetailsByName,
+  DetailsOptions,
+} from "../../slices/profile-slice";
 import "./profile.styles.scss";
 
 function Profile() {
@@ -18,9 +22,10 @@ function Profile() {
 
   const values = useAppSelector((state) => state.profile.details);
 
-  const handleChange = (data: any) => {
-    const { value, name } = data.target;
-    dispatch(addProfileDetailsByName({ value, name }));
+  const handleChange = (e: SyntheticEvent) => {
+    const { value, name } = e.target as HTMLInputElement;
+    let keyName = name as keyof DetailsOptions;
+    dispatch(addProfileDetailsByName({ value, name: keyName }));
   };
 
   return (

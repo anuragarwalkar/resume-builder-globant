@@ -4,14 +4,12 @@ import { Box } from "@mui/system";
 import { signInWithPopup } from "firebase/auth";
 import { Fragment } from "react";
 import { auth, provider } from "../../firebase-init";
-import "./login.css";
+import "./login.styles.scss";
 type Props = {
   loading: boolean;
 };
 
 const LoginComponent = ({ loading }: Props) => {
-  console.log("loading:", loading);
-
   const onLogin = (e: any) => {
     e.preventDefault();
     signInWithPopup(auth, provider);

@@ -1,6 +1,22 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState: any = {
+export type DetailsOptions = {
+  name: string;
+  email: string;
+  phone: string;
+  github: string;
+  linkedin: string;
+  description: string;
+};
+
+interface ProfileInitialStateType {
+  details: DetailsOptions;
+  auth: {
+    token: string | null;
+  };
+}
+
+const initialState: ProfileInitialStateType = {
   details: {
     name: "",
     email: "",
@@ -14,6 +30,13 @@ const initialState: any = {
   },
 };
 
+interface customType {
+  payload: {
+    name: keyof DetailsOptions;
+    value: string;
+  };
+}
+
 const profileSlice = createSlice({
   name: "profile",
   initialState,
@@ -21,7 +44,7 @@ const profileSlice = createSlice({
     addProfileDetails: (state, action) => {
       state.details = action.payload;
     },
-    addProfileDetailsByName: (state, action) => {
+    addProfileDetailsByName: (state, action: customType) => {
       const { name, value } = action.payload;
       state.details[name] = value;
     },
