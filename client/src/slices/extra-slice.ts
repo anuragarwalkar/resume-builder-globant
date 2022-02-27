@@ -1,8 +1,23 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { v4 as uuidv4 } from "uuid";
 
-// { name: "JavaScript", rating: 4, totalRating: 5 }
-const initialState: any = {
+interface SkillType {
+  name: string;
+  rating: number;
+  totalRating: number;
+  id: string;
+}
+
+interface InterestType {
+  name: string;
+  id: string;
+}
+
+interface ExtraInitialStateType {
+  skills: SkillType[];
+  interests: InterestType[];
+}
+const initialState: ExtraInitialStateType = {
   skills: [],
   interests: [],
 };
@@ -11,13 +26,13 @@ const extraSlice = createSlice({
   name: "extra",
   initialState,
   reducers: {
-    addSkills: (state: any, action) => {
+    addSkills: (state, action) => {
       state.skills.unshift({
         ...action.payload,
         id: uuidv4(),
       });
     },
-    addIntrests: (state: any, action) => {
+    addIntrests: (state, action) => {
       state.interests.push({
         ...action.payload,
         id: uuidv4(),

@@ -1,14 +1,26 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { v4 as uuidv4 } from "uuid";
 
-const initialState: any = {
+interface EducationType {
+  collegeUniversity: "";
+  fromYear: "";
+  toYear: "";
+  qualification: "";
+  location: "";
+}
+
+interface EducationInitialStateType {
+  educations: EducationType[];
+}
+
+const initialState: EducationInitialStateType = {
   educations: [],
 };
 const educationSlice = createSlice({
   name: "education",
   initialState,
   reducers: {
-    addEducation: (state: any, action) => {
+    addEducation: (state, action) => {
       state.educations.unshift({ ...action.payload, id: uuidv4() });
     },
   },
