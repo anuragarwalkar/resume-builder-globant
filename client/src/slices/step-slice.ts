@@ -9,14 +9,17 @@ const stepsMapper = {
   education: 6,
 };
 
-const initialState: any = {
+const initialState = {
   step: 1,
   maxStepCount: 6,
   nextBtnEnabled: true,
   preBtnEnabled: false,
 };
 
-const runOnStep = (state: any) => {
+type StepInitialStateType = typeof initialState;
+type stepMapperType = typeof stepsMapper;
+
+const runOnStep = (state: StepInitialStateType) => {
   if (state.step === 1) {
     state.preBtnEnabled = false;
     state.nextBtnEnabled = true;
@@ -42,8 +45,8 @@ const stepSlice = createSlice({
       runOnStep(state);
     },
     navigateToScrren: (state, action) => {
-      const stepName: string = action.payload.toLowerCase();
-      const step = (stepsMapper as any)[stepName];
+      const stepName = action.payload.toLowerCase() as keyof stepMapperType;
+      const step = stepsMapper[stepName];
       if (step) {
         state.step = step;
         runOnStep(state);
