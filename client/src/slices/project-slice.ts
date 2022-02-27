@@ -1,7 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-// { title: "", link: "", description: "" }
-const initialState: any = {
+interface ProjectType {
+  title: string;
+  link: string;
+  description: string;
+  id: string;
+}
+interface ProjectInitialStateType {
+  projects: ProjectType[];
+}
+const initialState: ProjectInitialStateType = {
   projects: [],
 };
 
