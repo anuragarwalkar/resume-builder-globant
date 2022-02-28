@@ -15,7 +15,7 @@ import { AppRating } from "../../hoc/app-rating.component";
 import { addSkills } from "../../slices/extra-slice";
 import "./skills.styles.scss";
 
-function Skills() {
+function Skills({ isMobile }: { isMobile: boolean }) {
   const skills = useSelector((state: any) => state.extra.skills);
   const [skill, setSkill] = useState("");
   const rating = useRef({ rating: 0, totalRating: 5 });

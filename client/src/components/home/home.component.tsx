@@ -1,9 +1,11 @@
+import { useState } from "react";
 import CVEditor from "../cv-editor/cv-editor.component";
 import CVView from "../cv-view/cv-view.component";
 import Navbar from "../navbar/navbar.component";
 import "./home.styles.scss";
 
 function Home() {
+  const [show, setShow] = useState(false);
   return (
     <div className="home">
       <div className="home__header">
@@ -11,11 +13,9 @@ function Home() {
       </div>
       <div className="home__content">
         <div className="home__cv-editor">
-          <CVEditor />
+          <CVEditor show={show} />
         </div>
-        <div className="home__cv-view">
-          <CVView />
-        </div>
+        {!show && <CVView />}
       </div>
     </div>
   );

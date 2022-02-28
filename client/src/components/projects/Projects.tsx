@@ -21,7 +21,7 @@ const initialFormState = {
   description: "",
 };
 
-function Projects() {
+function Projects({ isMobile }: { isMobile: boolean }) {
   // const [_] = useAppSelector((state) => state.project.projects);
   const [project, setProjectData] = useState(initialFormState);
 

@@ -22,7 +22,7 @@ const educationInitialState = {
   location: "",
 };
 
-function Profile() {
+function Profile({ isMobile }: { isMobile: boolean }) {
   // const values = useAppSelector((state) => state.education);
   const [formData, setFormData] = useState(educationInitialState);
   const dispatch = useDispatch();

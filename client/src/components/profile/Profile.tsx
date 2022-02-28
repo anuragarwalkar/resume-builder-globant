@@ -17,7 +17,7 @@ import {
 } from "../../slices/profile-slice";
 import "./profile.styles.scss";
 
-function Profile() {
+function Profile({ isMobile }: { isMobile: boolean }) {
   const dispatch = useDispatch();
 
   const values = useAppSelector((state) => state.profile.details);
@@ -28,64 +28,63 @@ function Profile() {
     dispatch(addProfileDetailsByName({ value, name: keyName }));
   };
 
-  return (
+  const MainContent = () => {
+    return (
+      <div className="cv-editor-profile">
+        <TextField
+          margin="dense"
+          variant="standard"
+          name="name"
+          label="Full Name"
+          style={{ width: "40%" }}
+          required
+          value={values.name}
+          onChange={handleChange}
+        />
+
+        <TextField
+          margin="dense"
+          label="Email"
+          variant="standard"
+          name="email"
+          required
+          style={{ width: "40%" }}
+          value={values.email}
+          onChange={handleChange}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <EmailIcon />
+              </InputAdornment>
+            ),
+          }}
+        />
+
+        <TextareaAutosize
+          name="description"
+          placeholder="Your short introduction"
+          required
+          minRows={4}
+          style={{ width: "90%" }}
+          value={values.description}
+          onChange={handleChange}
+        />
+      </div>
+    );
+  };
+
+  return !isMobile ? (
     <Paper>
       <Card>
         <CardHeader title="Personal Details" />
       </Card>
       <CardContent>
-        <div className="cv-editor-profile">
-          <TextField
-            margin="dense"
-            variant="standard"
-            name="name"
-            label="Full Name"
-            style={{ width: "40%" }}
-            required
-            value={values.name}
-            onChange={handleChange}
-          />
-
-          <TextField
-            margin="dense"
-            label="Email"
-            variant="standard"
-            name="email"
-            required
-            style={{ width: "40%" }}
-            value={values.email}
-            onChange={handleChange}
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <EmailIcon />
-                </InputAdornment>
-              ),
-            }}
-          />
-
-          <TextareaAutosize
-            name="description"
-            placeholder="Your short introduction"
-            required
-            minRows={4}
-            style={{ width: "90%" }}
-            value={values.description}
-            onChange={handleChange}
-          />
-        </div>
+        <MainContent />
       </CardContent>
     </Paper>
+  ) : (
+    <MainContent />
   );
 }
 
 export default Profile;
-
-/* <Button
-variant="contained"
-color="secondary"
-onClick={this.createAndDownloadPDF}
-endIcon={<GetAppIcon />}
->
-Generate PDF
-</Button>  */

@@ -24,7 +24,7 @@ const initialFormState = {
   from: "",
   location: "",
 };
-function Experience() {
+function Experience({ isMobile }: { isMobile: boolean }) {
   // const [values] = useAppSelector((state) => state.experience.experiences);
   const dispatch = useDispatch();
 

@@ -1,7 +1,14 @@
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import DownloadIcon from "@mui/icons-material/Download";
-import { Button } from "@mui/material";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Button,
+  Typography,
+} from "@mui/material";
 import LinearProgress from "@mui/material/LinearProgress";
 import { Box } from "@mui/system";
 import axios from "axios";
@@ -12,6 +19,7 @@ import { Provider, useDispatch } from "react-redux";
 import { useAppSelector } from "../../app/hooks";
 import { store } from "../../app/store";
 import environment from "../../environment";
+import useWindowDimensions from "../../hooks/useWindowDimensions";
 import { nextStep, prevStep } from "../../slices/step-slice";
 import CVView from "../cv-view/cv-view.component";
 import { tempStyles } from "../cv-view/tempStyles";
@@ -23,12 +31,13 @@ import Projects from "../projects/Projects";
 import Skills from "../skills/Skills";
 import "./cv-editor.styles.scss";
 
-function CVEditor() {
+function CVEditor({ show }: { show: boolean }) {
   const { name } = useAppSelector((state) => state.profile.details);
   const { step, preBtnEnabled, nextBtnEnabled } = useAppSelector(
     (state) => state.step
   );
   const [loading, setLoading] = useState(false);
+  const { height, width } = useWindowDimensions();
 
   const dispatch = useDispatch();
 
@@ -73,60 +82,83 @@ function CVEditor() {
     setLoading(false);
   };
 
-  const getComponent = () => {
+  const DynamicComponent = ({ isMobile = false }) => {
     switch (step) {
       case 1:
-        return <Profile />;
+        return <Profile isMobile={isMobile} />;
       case 2:
-        return <Skills />;
+        return <Skills isMobile={isMobile} />;
       case 3:
-        return <Experience />;
+        return <Experience isMobile={isMobile} />;
       case 4:
-        return <Projects />;
+        return <Projects isMobile={isMobile} />;
       case 5:
-        return <Interests />;
+        return <Interests isMobile={isMobile} />;
       case 6:
-        return <Education />;
+        return <Education isMobile={isMobile} />;
       default:
         return <div />;
     }
   };
+  const isMobile = width > 350;
 
   return (
     <div className="cv-editor">
-      <div>{getComponent()}</div>
-      <div className="cv-editor__buttons">
-        <Button
-          variant="contained"
-          color="secondary"
-          onClick={onPrevStep}
-          disabled={!preBtnEnabled}
-          startIcon={<ArrowBackIosIcon />}
-        >
-          Back
-        </Button>
-        <Button
-          variant="contained"
-          color="secondary"
-          onClick={onNextStep}
-          endIcon={<ArrowForwardIosIcon />}
-          disabled={!nextBtnEnabled}
-        >
-          Next
-        </Button>
-      </div>
-      <div className="cv-editor__download-button">
-        {!loading && (
+      {isMobile ? (
+        <Accordion expanded={show}>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1a-content"
+            id="panel1a-header"
+          >
+            <Typography>Personal Details</Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <DynamicComponent isMobile />
+          </AccordionDetails>
+        </Accordion>
+      ) : (
+        <div>
+          <DynamicComponent />
+        </div>
+      )}
+
+      {show && (
+        <div className="cv-editor__buttons">
           <Button
             variant="contained"
-            color="primary"
-            onClick={onDownloadResume}
-            endIcon={<DownloadIcon />}
+            color="secondary"
+            onClick={onPrevStep}
+            disabled={!preBtnEnabled}
+            startIcon={<ArrowBackIosIcon />}
           >
-            download cv
+            Back
           </Button>
-        )}
-      </div>
+          <Button
+            variant="contained"
+            color="secondary"
+            onClick={onNextStep}
+            endIcon={<ArrowForwardIosIcon />}
+            disabled={!nextBtnEnabled}
+          >
+            Next
+          </Button>
+        </div>
+      )}
+      {show && (
+        <div className="cv-editor__download-button">
+          {!loading && (
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={onDownloadResume}
+              endIcon={<DownloadIcon />}
+            >
+              download cv
+            </Button>
+          )}
+        </div>
+      )}
       <div className="cv-editor__download-progress">
         {loading && (
           <Box sx={{ width: "25%" }}>

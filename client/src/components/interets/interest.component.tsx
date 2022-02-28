@@ -15,7 +15,7 @@ import { useAppSelector } from "../../app/hooks";
 import { addIntrests } from "../../slices/extra-slice";
 import "./interests.styles.scss";
 
-function Interests() {
+function Interests({ isMobile }: { isMobile: boolean }) {
   const interests = useAppSelector((state) => state.extra.interests);
   const [interest, setInterest] = useState("");
   const dispatch = useDispatch();
