@@ -94,110 +94,118 @@ function CVView() {
     dispatch(navigateToScrren(id));
   };
 
-  return (
-    <div className="resume-container">
-      <div className="header">
-        <div className="main__row">
-          <div className="header__left">
-            <div className="full-name">
-              <span className="first-name" id="profile" onClick={navigateTo}>
-                {name}
-              </span>
+  const ResumeContainer = () => {
+    return (
+      <div className="resume-container">
+        <div className="header">
+          <div className="main__row">
+            <div className="header__left">
+              <div className="full-name">
+                <span className="first-name" id="profile" onClick={navigateTo}>
+                  {name}
+                </span>
+              </div>
+              <div className="contact-info">
+                <span className="email">Email: </span>
+                <span className="email-val">{email}</span>
+              </div>
             </div>
-            <div className="contact-info">
-              <span className="email">Email: </span>
-              <span className="email-val">{email}</span>
+
+            <div className="header__right">
+              <img
+                src="https://globant-cv-builder.web.app/globant_logo_main.png"
+                alt="Globant Logo"
+              />
+            </div>
+          </div>
+          <hr />
+          <div className="about">
+            <span className="desc">{description}</span>
+          </div>
+        </div>
+        <div className="details">
+          <div className="section">
+            <div className="section__title" id="skills" onClick={navigateTo}>
+              Skills
+            </div>
+            <div className="skills">
+              {skills.map((skill: any) => {
+                return (
+                  <div key={skill.name} className="skills__item">
+                    <div className="left">
+                      <div className="name">{skill.name}</div>
+                    </div>
+                    <AppRating
+                      name={skill.name}
+                      totalRating={skill.totalRating}
+                      rating={skill.rating}
+                    />
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+          <div className="section">
+            <div
+              className="section__title"
+              id="experience"
+              onClick={navigateTo}
+            >
+              Experience
+            </div>
+            <div className="section__list">
+              {experiences.map((experience: any) => {
+                return <ExperienceView key={experience.id} {...experience} />;
+              })}
             </div>
           </div>
 
-          <div className="header__right">
-            <img
-              src="https://globant-cv-builder.web.app/globant_logo_main.png"
-              alt="Globant Logo"
-            />
-          </div>
-        </div>
-        <hr />
-        <div className="about">
-          <span className="desc">{description}</span>
-        </div>
-      </div>
-      <div className="details">
-        <div className="section">
-          <div className="section__title" id="skills" onClick={navigateTo}>
-            Skills
-          </div>
-          <div className="skills">
-            {skills.map((skill: any) => {
+          <div className="section">
+            <div className="section__title" id="projects" onClick={navigateTo}>
+              Projects
+            </div>
+            {projects.map((project: any) => {
               return (
-                <div key={skill.name} className="skills__item">
-                  <div className="left">
-                    <div className="name">{skill.name}</div>
-                  </div>
-                  <AppRating
-                    name={skill.name}
-                    totalRating={skill.totalRating}
-                    rating={skill.rating}
-                  />
-                </div>
+                <ProjectView
+                  key={project.id}
+                  name={project.title}
+                  description={project.description}
+                />
               );
             })}
           </div>
-        </div>
-        <div className="section">
-          <div className="section__title" id="experience" onClick={navigateTo}>
-            Experience
+          <div className="section">
+            <div className="section__title" id="interests" onClick={navigateTo}>
+              Interests
+            </div>
+            <div className="section__list">
+              <div className="section__list-item">
+                {interests.map((interest: any, index: number) => (
+                  <span key={interest.id}>
+                    {interest.name}
+                    {index + 1 === interests.length ? "." : ", "}
+                  </span>
+                ))}
+              </div>
+            </div>
           </div>
-          <div className="section__list">
-            {experiences.map((experience: any) => {
-              return <ExperienceView key={experience.id} {...experience} />;
-            })}
-          </div>
-        </div>
 
-        <div className="section">
-          <div className="section__title" id="projects" onClick={navigateTo}>
-            Projects
-          </div>
-          {projects.map((project: any) => {
-            return (
-              <ProjectView
-                key={project.id}
-                name={project.title}
-                description={project.description}
-              />
-            );
-          })}
-        </div>
-        <div className="section">
-          <div className="section__title" id="interests" onClick={navigateTo}>
-            Interests
-          </div>
-          <div className="section__list">
-            <div className="section__list-item">
-              {interests.map((interest: any, index: number) => (
-                <span key={interest.id}>
-                  {interest.name}
-                  {index + 1 === interests.length ? "." : ", "}
-                </span>
-              ))}
+          <div className="section">
+            <div className="section__title" id="education" onClick={navigateTo}>
+              Education
+            </div>
+            <div className="section__list">
+              {educations.map((education: any) => {
+                return <EducationView key={education.id} {...education} />;
+              })}
             </div>
           </div>
         </div>
-
-        <div className="section">
-          <div className="section__title" id="education" onClick={navigateTo}>
-            Education
-          </div>
-          <div className="section__list">
-            {educations.map((education: any) => {
-              return <EducationView key={education.id} {...education} />;
-            })}
-          </div>
-        </div>
       </div>
-    </div>
-  );
+    );
+  };
+
+  return <ResumeContainer />;
 }
 
 export default CVView;

@@ -16,7 +16,7 @@
   }
 }
 
-@media only screen and (min-width: 350px) {
+@media only screen and (max-width: 400px) {
   .home {
     &__content {
       flex-direction: column;
@@ -30,6 +30,12 @@
     }
 
     &__cv-view {
+      padding: 0;
+    }
+  }
+
+  .cv-view {
+    &__desktop-view {
       display: none;
     }
   }

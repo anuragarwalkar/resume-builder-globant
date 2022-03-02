@@ -7,6 +7,7 @@ import {
   AccordionDetails,
   AccordionSummary,
   Button,
+  IconButton,
   Typography,
 } from "@mui/material";
 import LinearProgress from "@mui/material/LinearProgress";
@@ -19,7 +20,6 @@ import { Provider, useDispatch } from "react-redux";
 import { useAppSelector } from "../../app/hooks";
 import { store } from "../../app/store";
 import environment from "../../environment";
-import useWindowDimensions from "../../hooks/useWindowDimensions";
 import { nextStep, prevStep } from "../../slices/step-slice";
 import CVView from "../cv-view/cv-view.component";
 import { tempStyles } from "../cv-view/tempStyles";
@@ -31,13 +31,12 @@ import Projects from "../projects/Projects";
 import Skills from "../skills/Skills";
 import "./cv-editor.styles.scss";
 
-function CVEditor({ show }: { show: boolean }) {
+function CVEditor({ show, onClick }: { show: boolean; onClick: any }) {
   const { name } = useAppSelector((state) => state.profile.details);
   const { step, preBtnEnabled, nextBtnEnabled } = useAppSelector(
     (state) => state.step
   );
   const [loading, setLoading] = useState(false);
-  const { height, width } = useWindowDimensions();
 
   const dispatch = useDispatch();
 
@@ -100,28 +99,31 @@ function CVEditor({ show }: { show: boolean }) {
         return <div />;
     }
   };
-  const isMobile = width > 350;
 
   return (
     <div className="cv-editor">
-      {isMobile ? (
+      <div className="cv-editor__desktop">
+        <DynamicComponent />
+      </div>
+
+      <div className="cv-editor__mobile">
         <Accordion expanded={show}>
           <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
+            expandIcon={
+              <IconButton onClick={onClick}>
+                <ExpandMoreIcon />
+              </IconButton>
+            }
             aria-controls="panel1a-content"
             id="panel1a-header"
           >
-            <Typography>Personal Details</Typography>
+            <Typography onClick={onClick}>Personal Details</Typography>
           </AccordionSummary>
           <AccordionDetails>
             <DynamicComponent isMobile />
           </AccordionDetails>
         </Accordion>
-      ) : (
-        <div>
-          <DynamicComponent />
-        </div>
-      )}
+      </div>
 
       {show && (
         <div className="cv-editor__buttons">
@@ -145,6 +147,7 @@ function CVEditor({ show }: { show: boolean }) {
           </Button>
         </div>
       )}
+
       {show && (
         <div className="cv-editor__download-button">
           {!loading && (
@@ -159,6 +162,7 @@ function CVEditor({ show }: { show: boolean }) {
           )}
         </div>
       )}
+
       <div className="cv-editor__download-progress">
         {loading && (
           <Box sx={{ width: "25%" }}>
