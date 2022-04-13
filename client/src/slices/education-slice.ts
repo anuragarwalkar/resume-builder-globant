@@ -1,4 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
+
+import { createSlice } from '@reduxjs/toolkit';
 import { v4 as uuidv4 } from "uuid";
 
 interface EducationType {
@@ -20,7 +21,7 @@ const educationSlice = createSlice({
   name: "education",
   initialState,
   reducers: {
-    addEducation: (state, action) => {
+    addEducation: (state: any, action: any) => {
       state.educations.unshift({ ...action.payload, id: uuidv4() });
     },
   },

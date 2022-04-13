@@ -36,15 +36,15 @@ const stepSlice = createSlice({
   name: "step",
   initialState,
   reducers: {
-    nextStep: (state) => {
+    nextStep: (state: any) => {
       state.step++;
       runOnStep(state);
     },
-    prevStep: (state) => {
+    prevStep: (state: any) => {
       state.step--;
       runOnStep(state);
     },
-    navigateToScrren: (state, action) => {
+    navigateToScrren: (state: any, action: any) => {
       const stepName = action.payload.toLowerCase() as keyof stepMapperType;
       const step = stepsMapper[stepName];
       if (step) {
